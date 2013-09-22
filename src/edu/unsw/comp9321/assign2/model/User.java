@@ -11,12 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name="users")
-public class User {
+public class User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "uid", updatable = false, nullable = false)
-	Long uid;
+    @Column(name = "uid", updatable = false)
+	Long id;
 	
 	@Column(name="username")
 	String userName;
@@ -68,12 +68,12 @@ public class User {
 		lastvisit_at = new Date();
     }
     
-	public Long getUserId(){
-		return this.uid;
+	public Long getId() {
+		return this.id;
 	}
-	
-	public void setUserId(Long userId){
-		this.uid = userId;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getUserName(){

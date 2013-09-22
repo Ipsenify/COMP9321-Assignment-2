@@ -7,8 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.model.User;
-import edu.unsw.comp9321.assign2.model.dao.DAOFactory;
-import edu.unsw.comp9321.assign2.model.dao.UserDAO;
+import edu.unsw.comp9321.assign2.service.UserService;
 
 public class LoginForm extends AbstractForm {
 	
@@ -17,9 +16,9 @@ public class LoginForm extends AbstractForm {
 		
 		User user = new User();
 		user.setUserName("HELLO WORLD");
-		UserDAO dao = DAOFactory.getInstance().getUserDAO();
+		UserService userService = DBUtil.getUserService();
 		
-		dao.save(user);
+		userService.persist(user);
 		
 		return "site/login.jsp";
 	}

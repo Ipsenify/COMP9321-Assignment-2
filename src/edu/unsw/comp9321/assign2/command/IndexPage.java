@@ -5,8 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.model.User;
-import edu.unsw.comp9321.assign2.model.dao.DAOFactory;
-import edu.unsw.comp9321.assign2.model.dao.UserDAO;
+import edu.unsw.comp9321.assign2.service.UserService;
 
 public class IndexPage extends AbstractPage {
 	
@@ -21,8 +20,8 @@ public class IndexPage extends AbstractPage {
 	    //UserDAO userDAO = factory.getUserDAO();
 	    //User user = userDAO.findById((long)1, false);
 	    
-		UserDAO dao = DAOFactory.getInstance().getUserDAO();
-		User user = dao.find((long)1);
+		UserService userService = DBUtil.getUserService();
+		User user = userService.findById((long)1);
 		
 		this.request.setAttribute("user", user);
 		

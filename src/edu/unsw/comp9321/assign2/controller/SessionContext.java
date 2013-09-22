@@ -2,9 +2,8 @@ package edu.unsw.comp9321.assign2.controller;
 
 import java.util.Date;
 
+import edu.unsw.comp9321.assign2.dao.UserDAOImpl;
 import edu.unsw.comp9321.assign2.model.User;
-import edu.unsw.comp9321.assign2.model.dao.DAOFactory;
-import edu.unsw.comp9321.assign2.model.dao.UserDAO;
 
 public class SessionContext {
 
@@ -17,7 +16,7 @@ public class SessionContext {
 	}
 	
 	public boolean login(String username, String crypt){
-		UserDAO dao = DAOFactory.getInstance().getUserDAO();
+		/*UserDAOImpl dao = DAOFactory.getInstance().getUserDAO();
 		this.currentUser = dao.findByCredentials(username, crypt);
 		if(this.currentUser != null){
 			this.currentUser.onLogin();
@@ -25,7 +24,7 @@ public class SessionContext {
 			dao.persist(this.currentUser);
 			dao.flush();
 			return true;
-		}
+		}*/
 		return false;
 	}
 	
