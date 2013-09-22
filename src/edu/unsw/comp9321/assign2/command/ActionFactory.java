@@ -17,6 +17,8 @@ public class ActionFactory {
 		map.put("login", LoginForm.class);
 		map.put("register", RegistrationForm.class);
 		map.put("home", IndexPage.class);
+		map.put("auction/create", CreateAuctionForm.class);
+		map.put("auction/view", ViewAuctionPage.class);
 	}
 	
 	public Action getAction(String actionStr){

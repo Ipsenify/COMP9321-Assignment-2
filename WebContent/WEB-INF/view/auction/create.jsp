@@ -6,5 +6,5 @@
 <c:set var="pageTitle" scope="request" value="iBuy - ${auction.name}"/>
 
 <t:column1>
-	View Auction
+	<%@ include file="_form.jsp" %>
 </t:column1>

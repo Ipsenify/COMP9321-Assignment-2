@@ -72,5 +72,4 @@
        </fieldset>
      </form>
 </div>
- </form>
 </t:column1>
