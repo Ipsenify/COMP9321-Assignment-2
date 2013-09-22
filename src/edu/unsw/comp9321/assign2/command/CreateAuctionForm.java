@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.model.User;
-import edu.unsw.comp9321.assign2.model.dao.UserDAO;
 
 public class CreateAuctionForm extends AbstractForm {
 
