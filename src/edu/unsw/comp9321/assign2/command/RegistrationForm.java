@@ -58,13 +58,13 @@ public class RegistrationForm extends AbstractForm {
 		user.setCreditCardNumber("1212");
 		service.persist(user);*/
 		
-		User user = service.findById((long)1);
-		user.setLastName("Elhusseini");
+		//User user = service.findById((long)1);
+		//user.setLastName("Elhusseini");
 		
-		service.merge(user);
+		//service.merge(user);
 		
-		System.out.println("Username: " + user.getUserName());
-		System.out.println("Last visited: " + user.getLastvisit_at());
+		//System.out.println("Username: " + user.getUserName());
+		//System.out.println("Last visited: " + user.getLastvisit_at());
 		
 		ctx.close();
 		return "site/register.jsp";

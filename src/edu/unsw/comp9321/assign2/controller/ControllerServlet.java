@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import edu.unsw.comp9321.assign2.command.Action;
 import edu.unsw.comp9321.assign2.command.ActionFactory;
 
@@ -30,6 +27,7 @@ public class ControllerServlet extends HttpServlet {
      */
     public ControllerServlet() {
         super();
+        // Create the context set
         contexts = new HashMap<String, SessionContext>();
     }
 
@@ -54,14 +52,14 @@ public class ControllerServlet extends HttpServlet {
 		SessionContext context = getSessionContext(request.getSession().getId());
 		request.setAttribute("context", context);
 		
-		String actionStr = request.getParameter("action");
+		String actionStr = request.getRequestURI().substring(request.getContextPath().length());
 		Action action = ActionFactory.getInstance().getAction(actionStr);
 		action.setServlet(request, response);
 		action.setContext(context);
 		
 		String view = action.executeGET();
 		
-		request.getRequestDispatcher("WEB-INF/view/" + view).forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
 	}
 
 	/**
@@ -71,14 +69,14 @@ public class ControllerServlet extends HttpServlet {
 		SessionContext context = getSessionContext(request.getSession().getId());
 		request.setAttribute("context", context);
 		
-		String actionStr = request.getParameter("action");
+		String actionStr = request.getRequestURI().substring(request.getContextPath().length());
 		Action action = ActionFactory.getInstance().getAction(actionStr);
 		action.setServlet(request, response);
 		action.setContext(context);
 		
 		String view = action.executePOST();
 		
-		request.getRequestDispatcher("WEB-INF/view/" + view).forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
 	}
 
 }

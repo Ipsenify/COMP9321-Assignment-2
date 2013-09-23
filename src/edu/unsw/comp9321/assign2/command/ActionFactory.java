@@ -14,11 +14,14 @@ public class ActionFactory {
 
 	private ActionFactory(){
 		map = new HashMap<String, Class<?>>();
-		map.put("login", LoginForm.class);
-		map.put("register", RegistrationForm.class);
-		map.put("home", IndexPage.class);
-		map.put("auction/create", CreateAuctionForm.class);
-		map.put("auction/view", ViewAuctionPage.class);
+		map.put("/", IndexPage.class);
+		map.put("/index", IndexPage.class);
+		map.put("/home", IndexPage.class);
+		map.put("/login", LoginForm.class);
+		map.put("/register", RegistrationForm.class);
+		map.put("/admin/", AdminPanelPage.class);
+		map.put("/auction/create", CreateAuctionForm.class);
+		map.put("/auction/view", ViewAuctionPage.class);
 	}
 	
 	public Action getAction(String actionStr){
@@ -29,9 +32,6 @@ public class ActionFactory {
 			} catch (Exception e) {
 				return new ErrorPage(actionStr);
 			}
-		}else if(actionStr == null){
-			// Go to Default
-			return new IndexPage();
 		}else{
 			return new ErrorPage(actionStr);
 		}

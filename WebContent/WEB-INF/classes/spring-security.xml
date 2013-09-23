@@ -7,18 +7,15 @@
                     http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http use-expressions="true">
-        <intercept-url pattern="/**" access="permitAll" />
-        <form-login />
+    <http realm="Admin Panel">
+        <intercept-url pattern="/admin/*" access="ROLE_USER" />
+        <http-basic />
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="rod" password="koala" authorities="supervisor, teller, user" />
-                <user name="dianne" password="emu" authorities="teller, user" />
-                <user name="scott" password="wombat" authorities="user" />
-                <user name="peter" password="opal" authorities="user" />
+                <user name="admin" password="admin" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
