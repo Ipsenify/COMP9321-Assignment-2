@@ -1,6 +1,6 @@
 <%@tag description="Main Layout" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,26 +14,34 @@
 <title>${pageTitle}</title>
 
 <!-- Bootstrap core CSS -->
-<link
-	href="<t:url />/theme/css/bootstrap.min.css"
-	rel="stylesheet" media="screen">
+<link href="<t:url />/theme/css/bootstrap.min.css" rel="stylesheet"
+	media="screen">
+
+<link rel="stylesheet" href="<t:url />/theme/css/font-awesome.css">
+<!--[if IE 7]>
+  <link rel="stylesheet" href="<t:url />/css/font-awesome-ie7.css">
+<![endif]-->
 
 <!-- Custom styles for this template -->
-<link href="<t:url />/theme/css/style.css"
-	rel="stylesheet">
+<link href="<t:url />/theme/css/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
+      <script src="<t:url />/theme/js/html5shiv.js"></script>
+      <script src="<t:url />/theme/js/respond.min.js"></script>
     <![endif]-->
 <style>
 ${
 css
+
+
 }
 </style>
 <script type="text/javascript">
-	${headscript}
+	$
+	{
+		headscript
+	}
 </script>
 </head>
 <body style="">
@@ -55,14 +63,25 @@ css
 				</ul>
 				<c:choose>
 					<c:when test="${context.isAuthenticated()}">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="<t:url />/user/view">G'day ${context.getUser().getFullName()}</a></li>
-							<li><a class="btn btn-sm btn-danger" href="logout">Logout</a></li>
+						<ul class="nav navbar-nav full pull-right">
+							<li class="dropdown"><a href="#"
+								class="dropdown-toggle hidden-xs hidden-sm"
+								data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> ${context.user.fullName } <b
+									class="caret"></b>
+							</a>
+								<ul class="dropdown-menu">
+									<li role="presentation" class="dropdown-header">Your
+										Account</li>
+									<li><a href="<t:url />/user/view">Profile</a></li>
+									<li><a href="<t:url />/site/settings">Settings</a></li>
+									<li><a href="<t:url />/logout">Logout</a></li>
+								</ul></li>
+
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<form class="navbar-form navbar-right" method="POST"
-							action="login">
+							action="<t:url />/login">
 							<div class="form-group">
 								<input type="text" placeholder="Username" name="username"
 									class="form-control">
@@ -101,9 +120,13 @@ css
 	<script
 		src="${pageContext.request.contextPath}/theme/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/theme/js/offcanvas.js"></script>
-	<script src="${pageContext.request.contextPath}/theme/js/jquery.validate.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/theme/js/jquery.validate.min.js"></script>
 	<script type="text/javascript">
-		${script}
+		$
+		{
+			script
+		}
 	</script>
 </body>
 </html>

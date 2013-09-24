@@ -224,6 +224,9 @@ public class User{
 	}
 	
 	public String getFullName(){
+		if(this.nickName != null && !this.nickName.isEmpty()){
+			return this.nickName;
+		}
 		return this.firstName + " " + this.lastName;
 	}
 	
