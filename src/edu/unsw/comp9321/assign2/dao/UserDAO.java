@@ -6,6 +6,4 @@ import edu.unsw.comp9321.assign2.model.User;
 
 public interface UserDAO extends GenericDAO<User, Long> {
 
-	public User findByCredentials(String username, String password);
-	
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,8 +22,8 @@ public class Auction {
 	@Column(name="title")
 	String title; // 10 words max 
 	
-	@Column(name="category")
-	String category;
+	@ManyToOne
+    Category category;
 	
 	@Column(name="picture")
 	String picture;
@@ -39,12 +40,93 @@ public class Auction {
 	@Column(name="startingprice")
 	String startPrice;
 	
-	@Column(name="bidIncrement")
+	@Column(name="bidincrement")
 	int bidIncrement;
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name="expdate")
 	Date expDate;//min: The minimum closing time is 3 min and the maximum is 60 min //  optional.
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPostageDetails() {
+		return postageDetails;
+	}
+
+	public void setPostageDetails(String postageDetails) {
+		this.postageDetails = postageDetails;
+	}
+
+	public String getReservePrice() {
+		return reservePrice;
+	}
+
+	public void setReservePrice(String reservePrice) {
+		this.reservePrice = reservePrice;
+	}
+
+	public String getStartPrice() {
+		return startPrice;
+	}
+
+	public void setStartPrice(String startPrice) {
+		this.startPrice = startPrice;
+	}
+
+	public int getBidIncrement() {
+		return bidIncrement;
+	}
+
+	public void setBidIncrement(int bidIncrement) {
+		this.bidIncrement = bidIncrement;
+	}
+
+	public Date getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
+	}
+	
 	
 	
 }

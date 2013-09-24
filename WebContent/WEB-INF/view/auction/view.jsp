@@ -3,26 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<c:set var="pageTitle" scope="request" value="iBuy - ${auction.name}"/>
+<c:set var="pageTitle" scope="request" value="iBuy - ${auction.title}"/>
 
 <t:column1>
     <div class="well">
-        <h2>${listingBean.title}Title</h2>
+        <h2>${auction.title}</h2>
         
         <div class="row">
             <div class="col-lg-6">
-                <!-- Left Col -->
-                <img src="${pageContext.request.contextPath}/theme/img/Capture.png" class="img-rounded" width="500" height="500">
+                <img src="${pageContext.request.contextPath}/theme/img/Capture.png" class="img-rounded" height="600">
                 
             </div>
             <div class="col-lg-6">
-                <!--  Right Col -->
-                Category: ${listingBean.category}Cat<br/>
-                Postage Details: ${listingBean.postage}post<br/>
-                Starting/Current Bid: ${listingBean.start}start<br/>
-                Time Left: ${listingBean.closeTime}close<br/>
+                Category: ${auction.category}Cat<br/>
+                Postage Details: ${auction.postageDetails}post<br/>
+                Starting/Current Bid: ${auction.reservePrice}start<br/>
+                Time Left: ${auction.title}close<br/>
             </div>
         </div>
-        Description: ${listingBean.description}I eat poop
+        Description: ${auction.description}I eat poop 
     </div>
 </t:column1>

@@ -20,6 +20,8 @@ import edu.unsw.comp9321.assign2.command.ActionFactory;
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private static final String LOGIN_PAGE = "login";
+	
 	private HashMap<String, SessionContext> contexts;
 	
     /**
@@ -54,12 +56,30 @@ public class ControllerServlet extends HttpServlet {
 		
 		String actionStr = request.getRequestURI().substring(request.getContextPath().length());
 		Action action = ActionFactory.getInstance().getAction(actionStr);
+		if(action == null){
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Response Not Found");
+			return;
+		}
 		action.setServlet(request, response);
 		action.setContext(context);
+		if(!action.isPublic() && !context.isAuthenticated()){
+			// Redirect to login page
+			response.sendRedirect(request.getContextPath() + "/" + LOGIN_PAGE + "?redirectUrl=" + actionStr);
+			DBUtil.close();
+			return;
+		}
 		
 		String view = action.executeGET();
-		
-		request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
+		if(!view.isEmpty()){
+			if(view.startsWith("redirect:")){
+				response.sendRedirect(request.getContextPath() + "/" + view.substring(9));
+			}else if(view.startsWith("include:")){
+				request.getRequestDispatcher("/" + view.substring(8)).forward(request, response);
+			}else{
+				request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
+			}
+		}
+		DBUtil.close();
 	}
 
 	/**
@@ -71,12 +91,30 @@ public class ControllerServlet extends HttpServlet {
 		
 		String actionStr = request.getRequestURI().substring(request.getContextPath().length());
 		Action action = ActionFactory.getInstance().getAction(actionStr);
+		if(action == null){
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Response Not Found");
+			return;
+		}
 		action.setServlet(request, response);
 		action.setContext(context);
+		if(!action.isPublic() && !context.isAuthenticated()){
+			// Redirect to login page
+			response.sendRedirect(request.getContextPath() + "/" + LOGIN_PAGE + "?redirectUrl=" + actionStr);
+			DBUtil.close();
+			return;
+		}
 		
 		String view = action.executePOST();
-		
-		request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
+		if(!view.isEmpty()){
+			if(view.startsWith("redirect:")){
+				response.sendRedirect(request.getContextPath() + "/" + view.substring(9));
+			}else if(view.startsWith("include:")){
+				request.getRequestDispatcher("/" + view.substring(8)).forward(request, response);
+			}else{
+				request.getRequestDispatcher("/WEB-INF/view/" + view).forward(request, response);
+			}
+		}
+		DBUtil.close();
 	}
 
 }

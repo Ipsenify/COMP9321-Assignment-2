@@ -14,6 +14,9 @@ public interface UserService {
 
     public User findById(Long id);
     
-    public User findByName(String name);
+    public User findByUserName(String username);
+    
+    public User findByCredentials(String name, String password);
 
+    public User findByConformation(String confirmationurl);
 }

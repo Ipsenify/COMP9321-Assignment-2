@@ -30,7 +30,11 @@
 
         <!--**** Application components ****-->
         <bean id="userService" class="edu.unsw.comp9321.assign2.service.UserServiceImpl" />
+        <bean id="auctionService" class="edu.unsw.comp9321.assign2.service.AuctionServiceImpl" />
         
         <bean id="userDAO" class="edu.unsw.comp9321.assign2.dao.UserDAOImpl" />
+        <bean id="auctionDAO" class="edu.unsw.comp9321.assign2.dao.AuctionDAOImpl" />
+
+
         
 </beans>

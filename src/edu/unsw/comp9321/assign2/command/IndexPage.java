@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import edu.unsw.comp9321.assign2.controller.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.service.UserService;
 
@@ -21,10 +22,15 @@ public class IndexPage extends AbstractPage {
 	    //User user = userDAO.findById((long)1, false);
 	    
 		UserService userService = DBUtil.getUserService();
-		User user = userService.findById((long)1);
+		User user = userService.findById((long)2);
 		
 		this.request.setAttribute("user", user);
 		
 		return "site/index.jsp";
+	}
+	
+	@Override
+	public boolean isPublic(){
+		return true;
 	}
 }

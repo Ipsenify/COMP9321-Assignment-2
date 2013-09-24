@@ -10,6 +10,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import edu.unsw.comp9321.assign2.command.ConfirmationService;
+
 @Entity(name="users")
 public class User{
 	
@@ -59,13 +61,42 @@ public class User{
 	@Column(name="status")
 	int status;
 	
+	@Column(name="confirmationurl")
+	String confirmationUrl;
+	
+	public enum UserStatus{
+		NOTVERIFIED(0, "Not Verified"), 
+		VERIFIED(1, "Active"),
+		DENIED(-1, "Denied Access");
+		
+		private int status;
+		private String str;
+		private UserStatus(int status, String str){
+			this.status = status;
+			this.str = str;
+		}
+		
+		public int getValue(){
+			return this.status;
+		}
+		
+		public String toString(){
+			return this.str;
+		}
+		
+	};
+	
 	@PrePersist
     protected void onCreate() {
-		lastvisit_at = created_at = new Date();
+		this.lastvisit_at = created_at = new Date();
+		this.status = UserStatus.NOTVERIFIED.getValue();
+		this.setSuperUser(0);
+		// Create confirmation URL
+		this.confirmationUrl = ConfirmationService.generateUrl();
     }
 	
 	public void onLogin() {
-		lastvisit_at = new Date();
+		this.lastvisit_at = new Date();
     }
     
 	public Long getId() {
@@ -178,6 +209,41 @@ public class User{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public String getConfirmationUrl() {
+		return confirmationUrl;
+	}
+	
+	public void setStatus(UserStatus status){
+		this.status = status.getValue();
+	}
+
+	public void setConfirmationUrl(String confirmationUrl) {
+		this.confirmationUrl = confirmationUrl;
+	}
+	
+	public String getFullName(){
+		return this.firstName + " " + this.lastName;
+	}
+	
+	public String getShortenedCreditCard(){
+		if(this.creditCardNumber != null && this.creditCardNumber.length() > 4){
+			return this.creditCardNumber.substring(this.creditCardNumber.length()-4,this.creditCardNumber.length());
+		}
+		return "****";
+	}
+	
+	public String getStatusMessage(){
+		switch(this.status){
+		case 0: 
+			return UserStatus.NOTVERIFIED.toString();
+		case 1:
+			return UserStatus.VERIFIED.toString();
+		case -1:
+			return UserStatus.DENIED.toString();
+		}
+		return "Status Unknown";
 	}
 }
 

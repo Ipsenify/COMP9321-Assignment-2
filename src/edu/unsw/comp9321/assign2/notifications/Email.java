@@ -3,6 +3,10 @@ package edu.unsw.comp9321.assign2.notifications;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
+import edu.unsw.comp9321.assign2.model.User;
+
 public class Email {
 	private String from;
 	private String[] to;
@@ -13,6 +17,11 @@ public class Email {
 	private String mimeType;
 	private List<Attachment> attachments = new ArrayList<Attachment>();
 
+	public Email(User user){
+		this.setFrom(EmailService.EMAIL);
+		this.setTo(user.getEmail());
+	}
+	
 	public String getFrom() {
 		return from;
 	}
@@ -87,5 +96,9 @@ public class Email {
 
 	public void removeAllAttachments() {
 		this.attachments.clear();
+	}
+	
+	public void send() throws MessagingException {
+		EmailService.getInstance().sendEmail(this);
 	}
 }

@@ -8,4 +8,8 @@
 <t:column2>
 	<h1>Welcome ${user.getUserName()}</h1>	
 	<h1>Email:  ${user.getEmail()}</h1>
+	<h1>confirmation:  ${user.getConfirmationUrl()}</h1>
+	Is Logged In: ${context.isAuthenticated()}
+	
+	<i class="glyphicon glyphicon-search"></i>
 </t:column2>

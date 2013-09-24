@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<c:set var="css" scope="request" value="body{background-color:#eee;}"/>
+
 <t:column1>
 	<t:error />
 	
-	<form class="form-signin" method="POST" action="?action=login">
+	<form class="form-signin" method="POST" action="login">
 	   <h2 class="form-signin-heading">Please sign in</h2>
+	   <input name="redirectUrl" type="hidden" value="${redirectUrl}">
 	   <input name="username" type="text" class="form-control" placeholder="Username" autofocus="">
 	   <input name="password" type="password" class="form-control" placeholder="Password">
 	   <!-- <label class="checkbox">

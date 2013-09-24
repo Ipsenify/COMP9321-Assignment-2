@@ -55,14 +55,22 @@ public abstract class AbstractAction implements Action{
 	public void postAction() { }
 	
 	public String processView() throws ServletException, IOException{
-		throw new ServletException("GET method is not supported.");
+		throw new ServletException("GET method is not supported for " + request.getRequestURI() + ".");
 	}
 	
 	public String processSubmit() throws ServletException, IOException{
-		throw new ServletException("POST method is not supported.");
+		throw new ServletException("POST method is not supported for " + request.getRequestURI() + ".");
 	}
 	
 	protected void include(String view) throws ServletException, IOException{
 		request.getRequestDispatcher("WEB-INF/view/" + view).include(request, response);
+	}
+	
+	public boolean isPublic(){
+		return false;
+	}
+	
+	public String param(String param){
+		return request.getParameter(param);
 	}
 }

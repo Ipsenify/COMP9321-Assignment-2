@@ -39,7 +39,7 @@ public class EmailNotificationListener implements ServletContextListener {
 
 			sched.scheduleJob(job, trigger);
 
-			sched.start();
+			//sched.start();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

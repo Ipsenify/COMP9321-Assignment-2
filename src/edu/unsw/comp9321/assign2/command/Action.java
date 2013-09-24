@@ -16,4 +16,5 @@ public interface Action {
 	String executeGET() throws ServletException, IOException;
 	String executePOST() throws ServletException, IOException;
 	
+	boolean isPublic();
 }

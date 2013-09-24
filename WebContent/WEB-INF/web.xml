@@ -9,6 +9,10 @@
 		<url-pattern>*.css</url-pattern>
 		<url-pattern>*.js</url-pattern>
 		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.eot</url-pattern>
+		<url-pattern>*.svg</url-pattern>
+		<url-pattern>*.ttf</url-pattern>
+		<url-pattern>*.woff</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -48,4 +52,13 @@
 		</web-resource-collection> <auth-constraint> <role-name>ADMINS</role-name> 
 		</auth-constraint> </security-constraint> <login-config> <auth-method>BASIC</auth-method> 
 		<realm-name>Admin Pages</realm-name> </login-config> -->
+
+	<error-page>
+		<exception-type>javax.servlet.ServletException</exception-type>
+		<location>/WEB-INF/view/site/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/view/site/error.jsp</location>
+	</error-page>
 </web-app>

@@ -2,77 +2,73 @@ package edu.unsw.comp9321.assign2.command;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import edu.unsw.comp9321.assign2.dao.UserDAO;
+import edu.unsw.comp9321.assign2.controller.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
+import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;
 import edu.unsw.comp9321.assign2.service.UserService;
+import edu.unsw.comp9321.assign2.util.Helper;
 
 public class RegistrationForm extends AbstractForm {
 
-	private UserDAO userDAO;
-	
 	@Override
 	public String processView() throws ServletException, IOException {
-		
-		/*
-		User user = new User();
-		
-		user.setUserName("test");
-		user.setPassword("TEST");
-		
-		user.setFirstName("Hello");
-		user.setLastName("World");
-		
-		request.setAttribute("user", user);
-		
-		UserDAO dao = DAOFactory.getInstance().getUserDAO();
-		User user2 = dao.find((long)2);
-		System.out.println("User2: " + user2.getUserName());
-		
-		dao.save(user);
-		
-		//dao.save(user);
-		
-		dao.save(user);
-		*/
-		
-		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		UserService service = (UserService) ctx.getBean("userService");
-		
-		/*User user = new User();
-		user.setLastvisit_at(new Date());
-		user.setUserName("Hellooo");
-		user.setFirstName("What up");
-		user.setLastName("Elhusseini");
-		user.setEmail("whatup.");
-		user.setFullAddress("What up");
-		user.setCreated_at(new Date());
-		user.setNickName(" ");
-		user.setPassword("asdasdA");
-		user.setStatus(0);
-		user.setYearOfBirth(1990);
-		user.setCreditCardNumber("1212");
-		service.persist(user);*/
-		
-		//User user = service.findById((long)1);
-		//user.setLastName("Elhusseini");
-		
-		//service.merge(user);
-		
-		//System.out.println("Username: " + user.getUserName());
-		//System.out.println("Last visited: " + user.getLastvisit_at());
-		
-		ctx.close();
-		return "site/register.jsp";
+		if (!context.isAuthenticated()) {
+			User user = new User();
+			request.setAttribute("user", user);
+			return "user/register.jsp";
+		} else {
+			// Redirect to view
+			return "redirect:user/view";
+		}
 	}
-	
+
 	@Override
 	public String processSubmit() throws ServletException, IOException {
-		
-		return "";
+		// required stuff: client side
+		// check passwords match : client side
+		// check yearofbirth is int: client side
+		// check fields are clean: check full address (text area)
+		// username is not taken: (ajax with server)
+		// email is an actual email: client side
+		// check credit card number is of length (16): client side
+
+		User user = new User();
+		user.setFirstName(param("user.firstName"));
+		user.setLastName(param("user.lastName"));
+		user.setEmail(param("user.email"));
+		user.setUserName(param("user.userName"));
+		user.setPassword(Helper.encrypt(param("user.password")));
+		user.setNickName("");
+		user.setYearOfBirth(Helper.toInt(param("user.yearOfBirth")));
+		user.setFullAddress(param("user.fullAddress"));
+		user.setCreditCardNumber(param("user.creditCardNumber"));
+
+		// validate();
+
+		// Add to database
+		UserService service = DBUtil.getUserService();
+		service.persist(user);
+
+		// Send Confirmation Email
+		ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
+				Helper.getURLWithContextPath(request));
+		try {
+			confirmEmail.send();
+		} catch (MessagingException e) {
+			// Failed to send email
+			e.printStackTrace();
+		}
+
+		// Redirect to login page, maybe show a message to check email. // or
+		// other page
+		return "redirect:login";
+	}
+
+	@Override
+	public boolean isPublic() {
+		return true;
 	}
 }

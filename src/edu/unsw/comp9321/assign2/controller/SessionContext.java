@@ -2,8 +2,9 @@ package edu.unsw.comp9321.assign2.controller;
 
 import java.util.Date;
 
-import edu.unsw.comp9321.assign2.dao.UserDAOImpl;
 import edu.unsw.comp9321.assign2.model.User;
+import edu.unsw.comp9321.assign2.model.User.UserStatus;
+import edu.unsw.comp9321.assign2.service.UserService;
 
 public class SessionContext {
 
@@ -16,20 +17,30 @@ public class SessionContext {
 	}
 	
 	public boolean login(String username, String crypt){
-		/*UserDAOImpl dao = DAOFactory.getInstance().getUserDAO();
-		this.currentUser = dao.findByCredentials(username, crypt);
+		UserService service = DBUtil.getUserService();
+		this.currentUser = service.findByCredentials(username, crypt);
 		if(this.currentUser != null){
-			this.currentUser.onLogin();
-			
-			dao.persist(this.currentUser);
-			dao.flush();
-			return true;
-		}*/
+			// Check status
+			// Status: 1 = SUCCESS
+			// Status: 0 = NOT VERIFIED
+			// Status: -1 = DENIED ACCESS
+			if(this.currentUser.getStatus() == UserStatus.VERIFIED.getValue()){
+				// You're in
+				this.currentUser.onLogin();
+				service.merge(this.currentUser);
+				return true;
+			}
+		}
 		return false;
 	}
 	
 	public void logout(){
 		this.currentUser = null;
+	}
+	
+	public Long getUserId(){
+		if(this.currentUser != null) return this.currentUser.getId();
+		return null;
 	}
 	
 	public User getUser(){

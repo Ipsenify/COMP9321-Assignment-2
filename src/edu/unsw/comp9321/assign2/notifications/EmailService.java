@@ -15,12 +15,20 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class EmailService {
 
-	private static final String USERNAME = "sam.elhusseini2@gmail.com";
-	private static final String PASSWORD = "sammysam";
+	private static final String USERNAME = "cs9321.ibuy@gmail.com";
+	private static final String PASSWORD = "comp9321";
+	
+	public static final String EMAIL = "cs9321.ibuy@gmail.com";
 	
 	private Properties props;
 	
-	public EmailService(){
+	private static final EmailService instance = new EmailService();
+
+	public static EmailService getInstance(){
+		return instance;
+	}
+	
+	private EmailService(){
 		props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
