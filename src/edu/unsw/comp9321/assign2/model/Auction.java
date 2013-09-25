@@ -127,6 +127,13 @@ public class Auction {
 		this.expDate = expDate;
 	}
 	
+	// Helper Methods
 	
+	public String getShortDescription(){
+		if(this.description.length() > 100){
+			return this.description.substring(0,96) + " ...";
+		}
+		return this.description;
+	}
 	
 }

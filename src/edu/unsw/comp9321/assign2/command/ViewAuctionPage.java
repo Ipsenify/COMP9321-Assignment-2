@@ -16,15 +16,21 @@ public class ViewAuctionPage extends AbstractPage {
 	public String processView() throws ServletException, IOException{
 		// Look up Auction by ID
 		Integer id = Helper.toInt(param("id"));
-	
 		
-		AuctionService service = DBUtil.getAuctionService();
-		Auction auction = service.findById((long)id);
-		
-		//TODO: if doesn't exists, go to error page
-		
-		request.setAttribute("auction", auction);
-		return "auction/view.jsp";
+		if(id != 0){
+			AuctionService service = DBUtil.getAuctionService();
+			Auction auction = service.findById((long)id);
+			
+			if(auction == null){
+				//TODO: if doesn't exists, go to error page
+					
+			}
+			
+			
+			request.setAttribute("auction", auction);
+			return "auction/view.jsp";
+		}
+		throw new ServletException("");
 	}
 	
 	@Override

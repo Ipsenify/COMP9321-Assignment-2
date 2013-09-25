@@ -18,6 +18,47 @@
 		</div>
 		<div class="col-lg-6 pull-right product-meta">
 			<form class="form-horizontal" action="" method="post">
+
+				<ul class="list-group">
+					<li class="list-group-item"><h4
+							class="list-group-item-heading">${auction.category.name}</h4> <span
+						class="list-group-item-text">Category</span></li>
+					<li class="list-group-item"><h4
+							class="list-group-item-heading">10h 16m 43s (25 Sep, 2013
+							11:37:01 AEST)</h4> <span class="list-group-item-text">Time
+							Left</span></li>
+					<li class="list-group-item active"><h4
+							class="list-group-item-heading">AU $355.00</h4> <span
+						class="list-group-item-text">Current Bid</span>
+						<div class="row">
+							<div class="col-lg-12">
+								<c:choose>
+									<c:when test="${context.authenticated}">
+										<div class="form-group">
+											<div class="col-lg-4 col-lg-offset-2">
+												<input type="text" class="form-control"
+													placeholder="Enter $356.00 or more">
+											</div>
+											<div class="col-lg-4 col-lg-offset-1">
+												<button class="btn btn-info" type="submit">
+													<i class="icon-hand-up"></i> Place Bid
+												</button>
+											</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<span class="text-muted">Please Log in to place a bid.</span>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div></li>
+					<li class="list-group-item"><h4
+							class="list-group-item-heading">${auction.postageDetails}</h4> <span
+						class="list-group-item-text">Item Location</span></li>
+				</ul>
+
+
+
 				<table class="table">
 					<tr>
 						<td style="border-top: none;">Category</td>
@@ -61,7 +102,10 @@
 	</div>
 
 	<hr />
-	
+
+
+
+
 	<div class="row">
 		<div class="col-lg-12">
 			<blockquote>${auction.description }</blockquote>

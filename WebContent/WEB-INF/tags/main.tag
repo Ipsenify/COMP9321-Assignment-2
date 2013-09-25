@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
+<%@attribute name="javascript" fragment="true" required="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,6 +84,7 @@ css
 					<c:otherwise>
 						<form class="navbar-form navbar-right" method="POST"
 							action="<t:url />/login">
+							<input name="redirectUrl" type="hidden" value="${currentaction }">
 							<div class="form-group">
 								<input type="text" placeholder="Username" name="username"
 									class="form-control">
@@ -127,6 +130,8 @@ css
 		{
 			script
 		}
+
 	</script>
+	<jsp:invoke fragment="javascript"/>
 </body>
 </html>

@@ -15,4 +15,6 @@ public interface AuctionService {
 
     public Auction findById(Long id);
 
+    public List<Auction> search(String query);
+    
 }

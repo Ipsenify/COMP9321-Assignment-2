@@ -68,7 +68,7 @@ public class ControllerServlet extends HttpServlet {
 			DBUtil.close();
 			return;
 		}
-		
+		request.setAttribute("currentaction", actionStr);
 		String view = action.executeGET();
 		if(!view.isEmpty()){
 			if(view.startsWith("redirect:")){
