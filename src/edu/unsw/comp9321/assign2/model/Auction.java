@@ -1,5 +1,6 @@
 package edu.unsw.comp9321.assign2.model;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,41 +12,49 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name="auctions")
+@Entity(name = "auctions")
 public class Auction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "auctionid", updatable = false)
+	@Column(name = "auctionid", updatable = false)
 	Long id;
-	
-	@Column(name="title")
-	String title; // 10 words max 
-	
+
 	@ManyToOne
-    Category category;
-	
-	@Column(name="picture")
+	User author;
+
+	@Column(name = "title")
+	String title; // 10 words max
+
+	@ManyToOne
+	Category category;
+
+	@Column(name = "picture")
 	String picture;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	String description; // 100 words max
-	
-	@Column(name="postagedetails")
+
+	@Column(name = "postagedetails")
 	String postageDetails;
-	
-	@Column(name="reserveprice")
-	String reservePrice; //The reserve price is confidential and should be visible only to the user. 
-	
-	@Column(name="startingprice")
-	String startPrice;
-	
-	@Column(name="bidincrement")
+
+	@Column(name = "reserveprice")
+	Double reservePrice; // The reserve price is confidential and should be
+							// visible only to the user.
+
+	@Column(name = "currentprice")
+	Double currentPrice;
+
+	@Column(name = "bidincrement")
 	int bidIncrement;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="expdate")
-	Date expDate;//min: The minimum closing time is 3 min and the maximum is 60 min //  optional.
+	@Column(name = "expdate")
+	Date expDate;// min: The minimum closing time is 3 min and the maximum is 60
+					// min // optional.
+
+	@ManyToOne
+	User winningUser;
 
 	public Long getId() {
 		return id;
@@ -95,20 +104,20 @@ public class Auction {
 		this.postageDetails = postageDetails;
 	}
 
-	public String getReservePrice() {
+	public Double getReservePrice() {
 		return reservePrice;
 	}
 
-	public void setReservePrice(String reservePrice) {
+	public void setReservePrice(Double reservePrice) {
 		this.reservePrice = reservePrice;
 	}
 
-	public String getStartPrice() {
-		return startPrice;
+	public Double getCurrentPrice() {
+		return currentPrice;
 	}
 
-	public void setStartPrice(String startPrice) {
-		this.startPrice = startPrice;
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
 	}
 
 	public int getBidIncrement() {
@@ -126,14 +135,34 @@ public class Auction {
 	public void setExpDate(Date expDate) {
 		this.expDate = expDate;
 	}
-	
+
+	public User getWinningUser() {
+		return this.winningUser;
+	}
+
+	public void setWinningUser(User winningUser) {
+		this.winningUser = winningUser;
+	}
+
+	public User getAuthor() {
+		return this.author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
 	// Helper Methods
-	
-	public String getShortDescription(){
-		if(this.description.length() > 100){
-			return this.description.substring(0,96) + " ...";
+
+	public String getShortDescription() {
+		if (this.description.length() > 100) {
+			return this.description.substring(0, 96) + " ...";
 		}
 		return this.description;
 	}
-	
+
+	public boolean isRunning() {
+		return new Date().before(expDate);
+	}
+
 }

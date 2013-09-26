@@ -26,9 +26,17 @@
 		<param-name>appName</param-name>
 		<param-value>iBuy</param-value>
 	</context-param>
-	<!-- <listener>
-		<listener-class>edu.unsw.comp9321.assign2.controller.EmailNotificationListener</listener-class>
-	</listener> -->
+	<filter>
+		<filter-name>XSSFilter</filter-name>
+		<filter-class>edu.unsw.comp9321.assign2.common.XSSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XSSFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- <listener> <listener-class>edu.unsw.comp9321.assign2.controller.EmailNotificationListener</listener-class> 
+		</listener> -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

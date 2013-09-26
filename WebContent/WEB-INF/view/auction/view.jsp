@@ -17,7 +17,7 @@
 				alt="${auction.title}">
 		</div>
 		<div class="col-lg-6 pull-right product-meta">
-			<form class="form-horizontal" action="" method="post">
+			<form class="form-horizontal" method="post" action="<t:url/>/auction/bid">
 
 				<ul class="list-group">
 					<li class="list-group-item"><h4
@@ -27,8 +27,8 @@
 							class="list-group-item-heading">10h 16m 43s (25 Sep, 2013
 							11:37:01 AEST)</h4> <span class="list-group-item-text">Time
 							Left</span></li>
-					<li class="list-group-item active"><h4
-							class="list-group-item-heading">AU $355.00</h4> <span
+					<li class="list-group-item" style="background-color:#dff0d8"><h4
+							class="list-group-item-heading">AU $${auction.currentPrice}</h4> <span
 						class="list-group-item-text">Current Bid</span>
 						<div class="row">
 							<div class="col-lg-12">
@@ -36,7 +36,8 @@
 									<c:when test="${context.authenticated}">
 										<div class="form-group">
 											<div class="col-lg-4 col-lg-offset-2">
-												<input type="text" class="form-control"
+												<input name="bid.auctionid" type="hidden" value="${auction.id}">
+												<input name="bid.price" type="text" class="form-control"
 													placeholder="Enter $356.00 or more">
 											</div>
 											<div class="col-lg-4 col-lg-offset-1">

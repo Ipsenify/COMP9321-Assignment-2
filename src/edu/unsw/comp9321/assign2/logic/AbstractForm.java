@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public abstract class AbstractForm extends AbstractAction {
 	private List<String> successes = new ArrayList<String>();
 	
 	public void setError(String error){
-		errors.add("Wrong Username and password combination.");
+		errors.add(error);
 	}
 	
 	public void setWarning(String warning){

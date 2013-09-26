@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 
 import edu.unsw.comp9321.assign2.dao.AuctionDAO;
@@ -41,8 +42,14 @@ public class AuctionServiceImpl implements AuctionService {
 	public List<Auction> search(String query) {
 		Search search = new Search();
 		// Search by Title
-		search.addFilterILike("title", "%"+query+"%");
+		Filter filter = Filter.or(Filter.like("category.name",query + "%"), Filter.like("title","%" + query + "%"));
+		search.addFilter(filter);
+		
+		//search.addFilterOr(Filter.ilike("category.name","%" + query + "%"));
+		// Search by Category
+		//search.addFilterOr(Filter.ilike("title","%" + query + "%"));
 		// Search by Description
+		//search.addFilterOr(Filter.ilike("description","%" + query + "%"));
 		
 		return dao.search(search);
 	}

@@ -1,11 +1,11 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 
-import edu.unsw.comp9321.assign2.controller.DBUtil;
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.service.UserService;
 
 public class UserNameValidator extends AbstractAction {

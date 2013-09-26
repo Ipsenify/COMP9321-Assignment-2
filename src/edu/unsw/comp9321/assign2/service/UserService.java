@@ -6,7 +6,11 @@ import edu.unsw.comp9321.assign2.model.User;
 
 public interface UserService {
 
+	public void refresh(User user);
+	
 	public void persist(User user);
+	
+	public User save(User user);
 
 	public void merge(User user);
 
@@ -19,4 +23,6 @@ public interface UserService {
     public User findByCredentials(String name, String password);
 
     public User findByConformation(String confirmationurl);
+    
+    public User findByIdWithAuctions(Long id);
 }

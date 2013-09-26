@@ -9,7 +9,7 @@
 
 		<t:error />
 
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="POST">
 			<fieldset>
 				<legend>Update Profile</legend>
 				<%@include file="_form.jsp"%>

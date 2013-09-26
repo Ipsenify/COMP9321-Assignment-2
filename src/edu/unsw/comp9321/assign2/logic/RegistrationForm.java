@@ -1,11 +1,13 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 
-import edu.unsw.comp9321.assign2.controller.DBUtil;
+import org.hibernate.exception.ConstraintViolationException;
+
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;
 import edu.unsw.comp9321.assign2.service.UserService;
@@ -50,21 +52,25 @@ public class RegistrationForm extends AbstractForm {
 
 		// Add to database
 		UserService service = DBUtil.getUserService();
-		service.persist(user);
-
-		// Send Confirmation Email
-		ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
-				Helper.getURLWithContextPath(request));
 		try {
-			confirmEmail.send();
-		} catch (MessagingException e) {
-			// Failed to send email
-			e.printStackTrace();
-		}
+			service.persist(user);
+			
+			// Send Confirmation Email
+			ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
+					Helper.getURLWithContextPath(request));
+			try {
+				confirmEmail.send();
+			} catch (MessagingException e) {
+				// Failed to send email
+				e.printStackTrace();
+			}
+			return "redirect:login";
 
-		// Redirect to login page, maybe show a message to check email. // or
-		// other page
-		return "redirect:login";
+		} catch (Exception e) {
+			// Failed to save
+			setError(e.getMessage());
+			return "user/register.jsp";
+		}		
 	}
 
 	@Override

@@ -7,9 +7,9 @@ import edu.unsw.comp9321.assign2.model.User;
 
 public interface AuctionService {
 
-	public void persist(Auction user);
+	public void persist(Auction auction);
 
-	public void merge(Auction user);
+	public void merge(Auction auction);
 
     public List<Auction> findAll();
 

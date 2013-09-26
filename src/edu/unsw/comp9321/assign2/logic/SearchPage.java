@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
-import edu.unsw.comp9321.assign2.controller.DBUtil;
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.Auction;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
@@ -24,7 +24,7 @@ public class SearchPage extends AbstractPage {
 			searchResult.setResultSet(service.search(query));
 		}
 		request.setAttribute("searchResult", searchResult);
-		return "site/search.jsp";
+		return "auction/search.jsp";
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class SearchPage extends AbstractPage {
 		private String query;
 		private int page;
 
-		private static final int size = 1;
+		private static final int size = 10;
 
 		public SearchResult(String query, Integer page) {
 			this.query = query;

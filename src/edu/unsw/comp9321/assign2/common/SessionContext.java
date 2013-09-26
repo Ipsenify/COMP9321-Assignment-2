@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.controller;
+package edu.unsw.comp9321.assign2.common;
 
 import java.util.Date;
 
@@ -32,6 +32,12 @@ public class SessionContext {
 			}
 		}
 		return false;
+	}
+	
+	public User reloadUser(){
+		UserService service = DBUtil.getUserService();
+		this.currentUser = service.findById(this.getUserId());
+		return this.currentUser;
 	}
 	
 	public void logout(){

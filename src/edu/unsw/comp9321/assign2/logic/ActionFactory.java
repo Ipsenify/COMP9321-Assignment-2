@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.util.HashMap;
 
@@ -34,6 +34,8 @@ public class ActionFactory {
 		map.put("/admin/", AdminPanelPage.class);
 		map.put("/auction/create", CreateAuctionForm.class);
 		map.put("/auction/view", ViewAuctionPage.class);
+		map.put("/auction/bid", AuctionBidForm.class);
+		map.put("/my/auctions", ViewMyAuctionsPage.class);
 	}
 
 	public Action getAction(String actionStr) throws ServletException {

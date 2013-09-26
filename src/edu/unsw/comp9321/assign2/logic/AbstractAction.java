@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.unsw.comp9321.assign2.controller.SessionContext;
+import edu.unsw.comp9321.assign2.common.SessionContext;
 
 public abstract class AbstractAction implements Action{
 

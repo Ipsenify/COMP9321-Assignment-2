@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.controller;
+package edu.unsw.comp9321.assign2.common;
 
 import java.io.IOException;
 import java.util.logging.Logger;

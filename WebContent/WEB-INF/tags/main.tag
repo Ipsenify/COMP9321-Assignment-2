@@ -75,6 +75,7 @@ css
 									<li role="presentation" class="dropdown-header">Your
 										Account</li>
 									<li><a href="<t:url />/user/view">Profile</a></li>
+									<li><a href="<t:url />/my/auctions">My Auctions</a></li>
 									<li><a href="<t:url />/site/settings">Settings</a></li>
 									<li><a href="<t:url />/logout">Logout</a></li>
 								</ul></li>

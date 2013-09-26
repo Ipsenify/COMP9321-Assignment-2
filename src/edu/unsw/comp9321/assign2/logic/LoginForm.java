@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class LoginForm extends AbstractForm {
 		}else{
 			if(context.login(username, crypt)){
 				String redirectUrl = request.getParameter("redirectUrl");
-				if(redirectUrl != null){
+				if(redirectUrl != null && !redirectUrl.isEmpty()){
 					return "redirect:" + redirectUrl.substring(1);
 				}
 				return "redirect:home";

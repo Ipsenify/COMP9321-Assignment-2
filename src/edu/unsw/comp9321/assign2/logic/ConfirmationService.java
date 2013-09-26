@@ -1,11 +1,11 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 import java.util.Random;
 
 import javax.servlet.ServletException;
 
-import edu.unsw.comp9321.assign2.controller.DBUtil;
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.model.User.UserStatus;
 import edu.unsw.comp9321.assign2.service.UserService;
@@ -43,7 +43,7 @@ public class ConfirmationService extends AbstractAction {
 		Double result = 10 + (randomNum * (1000000000));
 		String url = Helper.encrypt(result.toString());
 		// Check url doesn't exist
-		UserService service = DBUtil.getUserService();
+		UserService service = DBUtil.getUserServiceWithoutRefresh();
 		if(service.findByConformation(url) != null){
 			return generateUrl();
 		}

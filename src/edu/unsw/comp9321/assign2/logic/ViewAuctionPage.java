@@ -1,10 +1,10 @@
-package edu.unsw.comp9321.assign2.command;
+package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import edu.unsw.comp9321.assign2.controller.DBUtil;
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.Auction;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
@@ -25,7 +25,6 @@ public class ViewAuctionPage extends AbstractPage {
 				//TODO: if doesn't exists, go to error page
 					
 			}
-			
 			
 			request.setAttribute("auction", auction);
 			return "auction/view.jsp";

@@ -4,6 +4,9 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:column2>
+	<jsp:attribute name="javascript">
+		
+	</jsp:attribute>
 	<jsp:attribute name="sidebar">
 	<div class="row profile">
       	<div class="col-lg-12">
@@ -22,6 +25,8 @@
 		<p class="lead">${user.email}</p>
 		<p>
 			<a class="btn btn-sm btn-info" href="<t:url />/user/update">Update Profile</a>
+
+			<a class="btn btn-sm btn-info" href="<t:url />/user/update">Change Password</a>
 		</p>
 	</div>
 
@@ -29,22 +34,17 @@
 		<div class="col-lg-6">
 			<h4>First Name</h4>
 			<p>${user.firstName}</p>
-
 			<h4>Last Name</h4>
 			<p>${user.lastName}</p>
+			<h4>Address</h4>
+			<p>${user.fullAddress}</p>
 		</div>
 		<div class="col-lg-6">
 			<h4>Nickname</h4>
 			<p>${user.nickName}</p>
-			
 			<h4>Born</h4>
 			<p>${user.yearOfBirth}</p>
 		</div>
-		<div class="col-lg-12">
-			<h4>Address</h4>
-			<p>${user.fullAddress}</p>
-		</div>
 	</div>
-    
     </jsp:body>
 </t:column2>

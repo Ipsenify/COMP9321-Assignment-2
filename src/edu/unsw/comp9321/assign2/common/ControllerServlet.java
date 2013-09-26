@@ -1,4 +1,4 @@
-package edu.unsw.comp9321.assign2.controller;
+package edu.unsw.comp9321.assign2.common;
 
 import java.io.IOException;
 import java.util.Date;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.unsw.comp9321.assign2.command.Action;
-import edu.unsw.comp9321.assign2.command.ActionFactory;
+import edu.unsw.comp9321.assign2.logic.Action;
+import edu.unsw.comp9321.assign2.logic.ActionFactory;
 
 /**
  * Servlet implementation class ControllerServlet
