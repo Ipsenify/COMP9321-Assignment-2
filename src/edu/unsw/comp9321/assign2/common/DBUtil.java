@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.unsw.comp9321.assign2.dao.UserDAO;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.service.BiddingService;
+import edu.unsw.comp9321.assign2.service.CategoryService;
 import edu.unsw.comp9321.assign2.service.UserService;
 
 public class DBUtil {
@@ -32,6 +33,11 @@ public class DBUtil {
 		return (AuctionService) ctx.getBean("auctionService");
 	}
 
+	public static CategoryService getCategoryService() {
+		ctx.refresh();
+		return (CategoryService) ctx.getBean("categoryService");
+	}
+	
 	public static BiddingService getBiddingService(){
 		ctx.refresh();
 		return (BiddingService) ctx.getBean("biddingService");

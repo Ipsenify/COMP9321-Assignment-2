@@ -19,6 +19,7 @@
 <link href="<t:url />/theme/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
 
+<link rel="stylesheet" href="<t:url />/theme/css/slider.css">
 <link rel="stylesheet" href="<t:url />/theme/css/font-awesome.css">
 <!--[if IE 7]>
   <link rel="stylesheet" href="<t:url />/css/font-awesome-ie7.css">
@@ -114,6 +115,7 @@ ${css}
 	<script
 		src="${pageContext.request.contextPath}/theme/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/theme/js/offcanvas.js"></script>
+	<script src="${pageContext.request.contextPath}/theme/js/bootstrap-slider.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/theme/js/jquery.validate.min.js"></script>
 	<jsp:invoke fragment="javascript"/>

@@ -10,6 +10,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;
+import edu.unsw.comp9321.assign2.notifications.EmailService;
 import edu.unsw.comp9321.assign2.service.UserService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
@@ -66,7 +67,8 @@ public class RegistrationForm extends AbstractForm {
 		ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
 				Helper.getURLWithContextPath(request));
 		try {
-			confirmEmail.send();
+			EmailService emailService = new EmailService();
+			emailService.sendEmail(confirmEmail);
 		} catch (MessagingException e) {
 			// Failed to send email
 			e.printStackTrace();

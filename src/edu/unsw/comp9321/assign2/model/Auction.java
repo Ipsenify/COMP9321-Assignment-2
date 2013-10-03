@@ -1,6 +1,5 @@
 package edu.unsw.comp9321.assign2.model;
 
-import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,8 +28,8 @@ public class Auction {
 	@ManyToOne
 	Category category;
 
-	@Column(name = "picture")
-	String picture;
+	@Column(name="picture", columnDefinition="mediumblob")
+	byte[] picture;
 
 	@Column(name = "description")
 	String description; // 100 words max
@@ -46,7 +45,7 @@ public class Auction {
 	Double currentPrice;
 
 	@Column(name = "bidincrement")
-	int bidIncrement;
+	Double bidIncrement;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "expdate")
@@ -80,11 +79,11 @@ public class Auction {
 		this.category = category;
 	}
 
-	public String getPicture() {
+	public byte[] getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(byte[] picture) {
 		this.picture = picture;
 	}
 
@@ -120,11 +119,11 @@ public class Auction {
 		this.currentPrice = currentPrice;
 	}
 
-	public int getBidIncrement() {
+	public Double getBidIncrement() {
 		return bidIncrement;
 	}
 
-	public void setBidIncrement(int bidIncrement) {
+	public void setBidIncrement(Double bidIncrement) {
 		this.bidIncrement = bidIncrement;
 	}
 
@@ -165,4 +164,13 @@ public class Auction {
 		return new Date().before(expDate);
 	}
 
+	public Double getNextBid(){
+		return this.currentPrice + this.bidIncrement;
+	}
+	
+	public String getTimeLeft(){
+		int diff = (int)((this.expDate.getTime()/60000) - (new Date().getTime()/60000));
+		return Integer.toString(diff);
+	}
+	
 }

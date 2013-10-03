@@ -32,7 +32,19 @@ public class BiddingServiceImpl implements BiddingService  {
 		User user = userDao.find(userId);
 		Auction auction = auctionDao.find(auctionId);
 		
-		auction.setCurrentPrice(auction.getCurrentPrice()+bid);
+		if(!auction.isRunning()){
+			return false;
+		}
+		
+		if(userId == auction.getAuthor().getId()){
+			return false;
+		}
+		
+		if(bid < auction.getNextBid()){
+			return false;
+		}
+		
+		auction.setCurrentPrice(bid);
 		auction.setWinningUser(user);
 		
 		return true;

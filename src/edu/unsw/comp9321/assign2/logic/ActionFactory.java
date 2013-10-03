@@ -31,9 +31,11 @@ public class ActionFactory {
 		map.put("/user/view", ViewProfilePage.class);
 		map.put("/user/validateusername", UserNameValidator.class);
 
-		map.put("/admin/", AdminPanelPage.class);
+		//map.put("/admin/", AdminPanelPage.class);
 		map.put("/auction/create", CreateAuctionForm.class);
+		//map.put("/auction/update", UpdateAuctionForm.class);
 		map.put("/auction/view", ViewAuctionPage.class);
+		map.put("/auction/image", AuctionPictureRenderer.class);
 		map.put("/auction/bid", AuctionBidForm.class);
 		map.put("/my/auctions", ViewMyAuctionsPage.class);
 	}

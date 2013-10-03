@@ -14,13 +14,16 @@ public class AuctionBidForm extends AbstractForm {
 	@Override
 	public String processSubmit() throws ServletException, IOException
 	{
-		Long auctionid = (long) Helper.toInt(param("bid.auctionid"));
+		Long auctionid = Helper.toLong(param("bid.auctionid"));
 		Long userid = context.getUserId();
 		
 		if(auctionid != 0){
 			BiddingService service = DBUtil.getBiddingService();
-			if(!service.placeBid(userid, auctionid, 10.00)){
-				setError("ERROR...");
+			Double bid = Helper.toDouble(param("bid.price"));
+			if(!service.placeBid(userid, auctionid, bid)){
+				context.setRedirectError("An error has occured, bid was not placed.");
+			}else{
+				context.setRedirectSuccess("Your bid has been placed.");
 			}
 		}
 		return "redirect:auction/view?id="+auctionid;

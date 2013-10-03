@@ -5,47 +5,51 @@
 
 
 <script type="text/javascript">
+	$.validator.addMethod('positiveNumber', function(value) {
+		return Number(value) > 0;
+	}, 'Enter a non-negative number.');
+
+	$.validator.addMethod('positiveInteger', function(value) {
+		return Number(value) >= 0;
+	}, 'Enter a non-negative number.');
+
+	
 	$(document).ready(function() {
 		$("#form").validate({
 			rules : {
-				firstName : {
-					minlength : 1,
-					required : false
-				},
-				lastName : {
-					minlength : 1,
-					required : false
-				},
-				email : {
-					required : true,
-					email : true
-				},
-				password : {
-					minlength : 6,
+				title : {
+					maxlength : 60,
 					required : true
 				},
-				confirmPassword : {
-					minlength : 6,
-					required : true,
-					equalTo : "#inputPassword"
-				},
-				userName : {
-					minlength : 6,
+				category : {
 					required : true
-				}
-			/*
-			userName : {
-				required : true,
-				remote : {
-					url : "<t:url />/user/validateusername",
-					type : "post",
-					data : {
-						username : function() {
-							return $("#inputUsername").val();
-						}
-					}
-				}
-			}*/
+				},
+				description : {
+					maxlength : 600,
+					required : true,
+				},
+				postagedetails : {
+					required : true
+				},
+				reservePrice : {
+					required : true,
+					number : true, 
+					positiveNumber: true
+				},
+				startPrice : {
+					required : true,
+					number : true, 
+					positiveInteger: true
+				},
+				increment : {
+					required : true,
+					number : true, 
+					positiveNumber: true
+				},
+				exptime : {
+					required : false,
+					number : true
+				},
 			},
 			highlight : function(element) {
 				$(element).closest('.form-group').addClass('has-error');
@@ -58,34 +62,6 @@
 			}
 		});
 	});
-
-	$("#inputUsername")
-			.blur(
-					function() {
-						var username = $("#inputUsername").val();
-						var request = $.ajax({
-							url : "<t:url />/user/validateusername",
-							type : "POST",
-							data : {
-								username : username
-							},
-							dataType : "json"
-						});
-						request
-								.done(function(json) {
-									if (json.result == "false") {
-										$("#inputUsername").parent()
-												.removeClass("has-error");
-										$("#usernamespan")
-												.html(
-														'<font color="#cc0000"></font>');
-									} else {
-										$("#inputUsername").parent().addClass(
-												"has-error");
-										$("#usernamespan")
-												.html(
-														'<label for="inputUsername" class="error">This username has already been taken. Try another!</label>');
-									}
-								});
-					});
+	
+	$('.slider').slider()
 </script>

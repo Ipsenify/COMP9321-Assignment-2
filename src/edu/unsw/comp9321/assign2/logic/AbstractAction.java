@@ -73,4 +73,8 @@ public abstract class AbstractAction implements Action{
 	public String param(String param){
 		return request.getParameter(param);
 	}
+	
+	public boolean exists(String param){
+		return request.getParameterMap().containsKey(param);
+	}
 }

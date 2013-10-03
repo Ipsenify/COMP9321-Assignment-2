@@ -12,7 +12,7 @@
 		<div class="well">
 
 		<t:alerts />
-		<form class="form-horizontal" method="POST">
+		<form class="form-horizontal" method="POST" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Update Auction</legend>
 				<%@include file="_form.jsp"%>

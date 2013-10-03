@@ -60,4 +60,24 @@ public class SessionContext {
 	public boolean isValid(){
 		return expiry_date.before(new Date());
 	}
+	
+	private String redirectError;
+	
+	public void setRedirectError(String error){
+		this.redirectError = error;
+	}
+	
+	public String getRedirectError(){
+		return this.redirectError;
+	}
+	
+	private String redirectSuccess;
+	
+	public void setRedirectSuccess(String success){
+		this.redirectSuccess = success;
+	}
+	
+	public String getRedirectSuccess(){
+		return this.redirectSuccess;
+	}
 }

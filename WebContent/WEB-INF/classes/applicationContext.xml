@@ -31,10 +31,13 @@
         <!--**** Application components ****-->
         <bean id="userService" class="edu.unsw.comp9321.assign2.service.UserServiceImpl" />
         <bean id="auctionService" class="edu.unsw.comp9321.assign2.service.AuctionServiceImpl" />
+        <bean id="categoryService" class="edu.unsw.comp9321.assign2.service.CategoryServiceImpl" />
         <bean id="biddingService" class="edu.unsw.comp9321.assign2.service.BiddingServiceImpl" />
+        
         
         <bean id="userDAO" class="edu.unsw.comp9321.assign2.dao.UserDAOImpl" />
         <bean id="auctionDAO" class="edu.unsw.comp9321.assign2.dao.AuctionDAOImpl" />
+        <bean id="categoryDAO" class="edu.unsw.comp9321.assign2.dao.CategoryDAOImpl" />
 
 
         

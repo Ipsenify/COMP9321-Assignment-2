@@ -97,8 +97,4 @@ public class Email {
 	public void removeAllAttachments() {
 		this.attachments.clear();
 	}
-	
-	public void send() throws MessagingException {
-		EmailService.getInstance().sendEmail(this);
-	}
 }

@@ -3,36 +3,39 @@ package edu.unsw.comp9321.assign2.logic;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.Auction;
 import edu.unsw.comp9321.assign2.model.Category;
+import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
-public class CreateAuctionForm extends AbstractForm {
-
+public class UpdateAuctionForm extends AbstractForm {
+	
 	@Override
-	public String processView() throws ServletException, IOException {
-		request.setAttribute("categories", DBUtil.getCategoryService()
-				.findAll());
-		return "auction/create.jsp";
+	public String processView() throws ServletException, IOException
+	{
+		Auction auction = DBUtil.getAuctionService().findById(Helper.toLong(param("id")));
+		if(auction == null){
+			throw new ServletException("The requested auction does not exist");
+		}
+		if(auction.getAuthor().getId() != context.getUserId()){
+			throw new ServletException("You do not have access to edit this auction.");
+		}
+		request.setAttribute("auction", auction);
+		return "auction/update.jsp";
 	}
-
+	
 	@Override
-	public String processSubmit() throws ServletException, IOException {
-		Auction auction = new Auction();
-		auction.setAuthor(context.getUser());
-
+	public String processSubmit() throws ServletException, IOException
+	{
+		AuctionService service = DBUtil.getAuctionService();
+		Auction auction = service.findById(Helper.toLong(param("id")));
+		
 		auction.setTitle(param("title"));
 
 		// Look up category
@@ -54,7 +57,7 @@ public class CreateAuctionForm extends AbstractForm {
 			e.printStackTrace();
 		}
 		auction.setPicture(bFile);
-
+		
 		auction.setDescription(param("description"));
 		auction.setPostageDetails(param("postagedetails"));
 		auction.setReservePrice(Helper.toDouble(param("reservePrice")));
@@ -68,10 +71,10 @@ public class CreateAuctionForm extends AbstractForm {
 		auction.setExpDate(cal.getTime());
 
 		// Insert to database
-		AuctionService auctionService = DBUtil.getAuctionService();
 		try {
-			Auction ret = auctionService.save(auction);
-			return "redirect:auction/view?id=" + ret.getId();
+			service.merge(auction);
+			
+			return "redirect:auction/view?id=" + auction.getId();
 		} catch (Exception e) {
 			throw new ServletException(
 					"The input you have enterered is corrupted.");

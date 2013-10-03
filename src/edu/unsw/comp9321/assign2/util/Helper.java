@@ -22,7 +22,23 @@ public class Helper {
 			return null;
 		}
 	}
-
+	
+	public static Long toLong(String str){
+		try {
+			return Long.parseLong(str);
+		} catch (NumberFormatException e) {
+			return (long)0;
+		}
+	}
+	
+	public static Double toDouble(String str){
+		try {
+			return Double.parseDouble(str);
+		} catch (NumberFormatException e) {
+			return 0.0;
+		}
+	}
+	
 	public static int toInt(String str) {
 		try {
 			return Integer.parseInt(str);

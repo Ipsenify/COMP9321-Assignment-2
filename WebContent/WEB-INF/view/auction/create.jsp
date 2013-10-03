@@ -10,7 +10,7 @@
 	<jsp:body>
 	<div class="well">
 		<t:alerts />
-		<form id="form" class="form-horizontal" method="POST">
+		<form id="form" class="form-horizontal" method="POST" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Create Auction</legend>
 				<%@include file="_form.jsp"%>

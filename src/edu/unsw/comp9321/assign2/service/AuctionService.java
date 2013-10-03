@@ -9,6 +9,8 @@ public interface AuctionService {
 
 	public void persist(Auction auction);
 
+	public Auction save(Auction auction);
+
 	public void merge(Auction auction);
 
     public List<Auction> findAll();

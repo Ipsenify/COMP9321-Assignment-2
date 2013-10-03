@@ -26,6 +26,10 @@ public class AuctionServiceImpl implements AuctionService {
 	public void persist(Auction auction) {
 		dao.persist(auction);
 	}
+	
+	public Auction save(Auction auction) {
+		return dao.save(auction);
+	}
 
 	public void merge(Auction auction) {
 		dao.merge(auction);

@@ -26,6 +26,7 @@ public class RegistrationPage extends AbstractPage {
 		user.setUserName(param("username"));
 		user.setPassword(param("pass"));
 		user.setEmail(param("email"));
+		
 		request.setAttribute("user", user);
 		return "user/register.jsp";
 	}
