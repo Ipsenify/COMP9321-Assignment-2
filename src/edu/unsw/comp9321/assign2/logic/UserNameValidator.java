@@ -12,6 +12,7 @@ public class UserNameValidator extends AbstractAction {
 
 	@Override 
 	public String processSubmit() throws ServletException, IOException{
+		
 		String username = request.getParameter("username");
 		if(!username.isEmpty()){
 			String output;

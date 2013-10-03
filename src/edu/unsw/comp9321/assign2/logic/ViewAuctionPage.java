@@ -10,7 +10,7 @@ import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
 
-public class ViewAuctionPage extends AbstractPage {
+public class ViewAuctionPage extends AbstractForm {
 	
 	@Override
 	public String processView() throws ServletException, IOException{

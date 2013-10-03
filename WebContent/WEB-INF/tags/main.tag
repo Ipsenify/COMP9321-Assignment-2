@@ -33,18 +33,8 @@
       <script src="<t:url />/theme/js/respond.min.js"></script>
     <![endif]-->
 <style>
-${
-css
-
-
-}
+${css}
 </style>
-<script type="text/javascript">
-	$
-	{
-		headscript
-	}
-</script>
 </head>
 <body style="">
 	<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -126,13 +116,6 @@ css
 	<script src="${pageContext.request.contextPath}/theme/js/offcanvas.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/theme/js/jquery.validate.min.js"></script>
-	<script type="text/javascript">
-		$
-		{
-			script
-		}
-
-	</script>
 	<jsp:invoke fragment="javascript"/>
 </body>
 </html>

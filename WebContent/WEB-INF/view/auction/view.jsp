@@ -7,6 +7,8 @@
 
 <t:column1>
 	<div class="row">
+	
+		<t:alerts />
 		<div class="col-lg-12">
 			<div class="page-header">
 				<h1 id="nav">${auction.title}</h1>

@@ -17,6 +17,7 @@
             <th>#</th>
             <th>Title</th>
             <th>Category</th>
+            <th>Reserve Price</th>
             <th>Current Price</th>
             <th>Status</th>
             <th></th>
@@ -27,6 +28,7 @@
 				<td> <a href="<t:url />/auction/view?id=${auction.id }">#${auction.id }</a> </td>
 				<td> ${auction.title}</td>
 				<td>${auction.category.name} </td>
+				<td> $${auction.reservePrice} </td>
 				<td> $${auction.currentPrice} </td>
 				<td>
 				</td>

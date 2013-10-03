@@ -27,50 +27,51 @@ public class RegistrationForm extends AbstractForm {
 		}
 	}
 
+	public boolean isValid(String str) {
+		return str != null && !str.isEmpty();
+	}
+
 	@Override
 	public String processSubmit() throws ServletException, IOException {
-		// required stuff: client side
-		// check passwords match : client side
-		// check yearofbirth is int: client side
-		// check fields are clean: check full address (text area)
-		// username is not taken: (ajax with server)
-		// email is an actual email: client side
-		// check credit card number is of length (16): client side
+		String password = param("password");
+		String username = param("userName");
+		String email = param("email");
 
+		// Validate required fields
+		if (!isValid(password) || !isValid(username) || !isValid(email)) {
+			throw new ServletException(
+					"The input you have enterered is corrupted.");
+		}
 		User user = new User();
-		user.setFirstName(param("user.firstName"));
-		user.setLastName(param("user.lastName"));
-		user.setEmail(param("user.email"));
-		user.setUserName(param("user.userName"));
-		user.setPassword(Helper.encrypt(param("user.password")));
-		user.setNickName("");
-		user.setYearOfBirth(Helper.toInt(param("user.yearOfBirth")));
-		user.setFullAddress(param("user.fullAddress"));
-		user.setCreditCardNumber(param("user.creditCardNumber"));
+		user.setFirstName(param("firstName"));
+		user.setLastName(param("lastName"));
+		user.setEmail(email);
+		user.setUserName(username);
+		user.setPassword(Helper.encrypt(password));
+		user.setNickName(param("nickName"));
+		user.setYearOfBirth(Helper.toInt(param("yearOfBirth")));
+		user.setFullAddress(param("fullAddress"));
+		user.setCreditCardNumber(param("creditCardNumber"));
 
-		// validate();
-
-		// Add to database
+		// Insert to database
 		UserService service = DBUtil.getUserService();
 		try {
 			service.persist(user);
-			
-			// Send Confirmation Email
-			ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
-					Helper.getURLWithContextPath(request));
-			try {
-				confirmEmail.send();
-			} catch (MessagingException e) {
-				// Failed to send email
-				e.printStackTrace();
-			}
-			return "redirect:login";
 
 		} catch (Exception e) {
-			// Failed to save
-			setError(e.getMessage());
-			return "user/register.jsp";
-		}		
+			throw new ServletException(
+					"The input you have enterered is corrupted.");
+		}
+		// Send Confirmation Email
+		ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
+				Helper.getURLWithContextPath(request));
+		try {
+			confirmEmail.send();
+		} catch (MessagingException e) {
+			// Failed to send email
+			e.printStackTrace();
+		}
+		return "redirect:login";
 	}
 
 	@Override

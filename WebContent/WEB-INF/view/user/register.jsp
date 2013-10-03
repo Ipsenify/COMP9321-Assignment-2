@@ -4,9 +4,13 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:column1>
+	<jsp:attribute name="javascript">
+		<%@include file="_form-js.jsp"%>
+	</jsp:attribute>
+	<jsp:body>
 	<div class="well">
 
-		<t:error />
+		<t:alerts />
 
 		<form id="form" class="form-horizontal" method="POST">
 			<fieldset>
@@ -15,4 +19,5 @@
 			</fieldset>
 		</form>
 	</div>
+	</jsp:body>
 </t:column1>

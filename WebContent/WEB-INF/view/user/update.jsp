@@ -5,10 +5,13 @@
 
 
 <t:column1>
-	<div class="well">
+	<jsp:attribute name="javascript">
+		<%@include file="_form-js.jsp"%>
+	</jsp:attribute>
+	<jsp:body>
+		<div class="well">
 
-		<t:error />
-
+		<t:alerts />
 		<form class="form-horizontal" method="POST">
 			<fieldset>
 				<legend>Update Profile</legend>
@@ -16,4 +19,5 @@
 			</fieldset>
 		</form>
 	</div>
+	</jsp:body>
 </t:column1>

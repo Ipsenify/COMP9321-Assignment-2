@@ -6,7 +6,7 @@
 <c:set var="css" scope="request" value="body{background-color:#eee;}"/>
 
 <t:column1>
-	<t:error />
+	<t:alerts />
 	
 	<form class="form-signin" method="POST" action="login">
 	   <h2 class="form-signin-heading">Please sign in</h2>

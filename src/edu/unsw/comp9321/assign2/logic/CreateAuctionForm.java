@@ -10,8 +10,7 @@ public class CreateAuctionForm extends AbstractForm {
 
 	@Override
 	public String processView() throws ServletException, IOException {
-		
-		return "auction/_form.jsp";
+		return "auction/create.jsp";
 	}
 	
 	@Override

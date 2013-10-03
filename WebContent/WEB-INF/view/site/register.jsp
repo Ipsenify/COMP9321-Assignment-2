@@ -4,7 +4,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:column1>
-	<t:error />
+	<t:alerts />
 	
 	<form class="form-signin" method="POST" action="register">
 	   <h2 class="form-signin-heading">Sign up</h2>
