@@ -16,15 +16,24 @@ import edu.unsw.comp9321.assign2.notifications.EmailNotificationJob;
 
 public class EmailNotificationListener implements ServletContextListener {
 
+	private Scheduler sched;
+	
+	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-
+		System.out.println("Stopping the Application");
+		try{
+			sched.shutdown();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
+	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		System.out.println("Starting The Application");
 		try {
 			SchedulerFactory sf = new StdSchedulerFactory();
-			Scheduler sched = sf.getScheduler();
+			sched = sf.getScheduler();
 
 			JobDetail job = JobBuilder.newJob(EmailNotificationJob.class)
 					.withIdentity("job1", "group1").build();
@@ -38,8 +47,8 @@ public class EmailNotificationListener implements ServletContextListener {
 					.build();
 
 			sched.scheduleJob(job, trigger);
-
-			//sched.start();
+			
+			sched.start();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

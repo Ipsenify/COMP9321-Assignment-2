@@ -8,6 +8,8 @@
 	
 	<form class="form-signin" method="POST" action="register">
 	   <h2 class="form-signin-heading">Sign up</h2>
+	   
+	   <input type="hidden" value="${synchronizer}" name="synchronizer"/>
 	   <input name="email" type="text" class="form-control" placeholder="Email" autofocus="">
 	   <input name="username" type="text" class="form-control" placeholder="Username">
 	   <input type="password" class="form-control" placeholder="Password">

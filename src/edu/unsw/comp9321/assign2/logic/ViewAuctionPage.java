@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.Auction;
+import edu.unsw.comp9321.assign2.model.Auction.AuctionStatus;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
@@ -37,6 +38,10 @@ public class ViewAuctionPage extends AbstractForm {
 				context.setRedirectSuccess(null);
 			}
 			
+			// Set Status
+			if(auction.getStatus() != AuctionStatus.ACTIVE.getValue()){
+				setWarning("This auction is not currently running");
+			}
 			request.setAttribute("auction", auction);
 			
 			return "auction/view.jsp";

@@ -7,7 +7,7 @@
 	<jsp:attribute name="javascript">
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('button.accept').change(function() {
+				$('button.accept').click(function() {
 					$.ajax({
 						type : 'POST',
 						url : '<t:url/>/my/auctions/accept',
@@ -60,7 +60,9 @@
           </tr>
         </thead>
 		<c:forEach items="${active}" var="auction">
-			<tr <c:if test="${auction.isRunning() }">class="success"</c:if>>
+			<tr row-key="${auction.id}"
+							<c:if test="${auction.status == 1 }">class="success"</c:if>
+							<c:if test="${auction.status == 0 }">class="danger"</c:if>>
 				<td> <a href="<t:url />/auction/view?id=${auction.id }">#${auction.id }</a> </td>
 				<td> ${auction.title}</td>
 				<td>${auction.category.name} </td>
@@ -105,7 +107,9 @@
           </tr>
         </thead>
 		<c:forEach items="${archived}" var="auction">
-			<tr <c:if test="${auction.isRunning() }">class="success"</c:if>>
+			<tr row-key="${auction.id}"
+							<c:if test="${auction.status == 1 }">class="success"</c:if>
+							<c:if test="${auction.status == 0 }">class="danger"</c:if>>
 				<td> <a href="<t:url />/auction/view?id=${auction.id }">#${auction.id }</a> </td>
 				<td> ${auction.title}</td>
 				<td>${auction.category.name} </td>

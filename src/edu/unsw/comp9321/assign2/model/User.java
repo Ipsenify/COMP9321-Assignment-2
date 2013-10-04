@@ -15,9 +15,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Sort;
-import org.hibernate.annotations.SortType;
-
 import edu.unsw.comp9321.assign2.logic.ConfirmationService;
 
 @Entity(name = "users")

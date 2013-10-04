@@ -5,6 +5,7 @@ import java.util.Date;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.model.User.UserStatus;
 import edu.unsw.comp9321.assign2.service.UserService;
+import edu.unsw.comp9321.assign2.util.Helper;
 
 public class SessionContext {
 
@@ -79,5 +80,15 @@ public class SessionContext {
 	
 	public String getRedirectSuccess(){
 		return this.redirectSuccess;
+	}
+	
+	private String token = Helper.generateNext();
+	
+	public void refreshToken(){
+		token = Helper.generateNext();
+	}
+	
+	public String getSyncronizerToken(){
+		return this.token;
 	}
 }

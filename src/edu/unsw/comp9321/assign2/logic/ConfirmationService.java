@@ -38,11 +38,7 @@ public class ConfirmationService extends AbstractAction {
 	}
 	
 	public static String generateUrl(){
-		Random random = new Random();
-		double randomNum = random.nextDouble();
-		Double result = 10 + (randomNum * (1000000000));
-		String url = Helper.encrypt(result.toString());
-		// Check url doesn't exist
+		String url = Helper.generateNext();
 		UserService service = DBUtil.getUserServiceWithoutRefresh();
 		if(service.findByConformation(url) != null){
 			return generateUrl();

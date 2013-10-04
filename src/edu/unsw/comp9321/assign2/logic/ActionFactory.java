@@ -35,6 +35,7 @@ public class ActionFactory {
 		map.put("/user/register", RegistrationForm.class);
 
 		map.put("/user/update", UpdateProfileForm.class);
+		map.put("/user/changepassword", ChangePasswordForm.class);
 		map.put("/user/view", ViewProfilePage.class);
 		map.put("/user/validateusername", AJAXUserNameValidator.class);
 		

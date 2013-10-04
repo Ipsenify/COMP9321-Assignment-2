@@ -12,7 +12,7 @@ import edu.unsw.comp9321.assign2.notifications.EmailService;
 import edu.unsw.comp9321.assign2.service.UserService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
-public class RegistrationForm extends AbstractForm {
+public class RegistrationForm extends AbstractSynchronizedForm {
 
 	@Override
 	public String processView() throws ServletException, IOException {
@@ -64,13 +64,7 @@ public class RegistrationForm extends AbstractForm {
 		// Send Confirmation Email
 		ConfirmationEmail confirmEmail = new ConfirmationEmail(user,
 				Helper.getURLWithContextPath(request));
-		try {
-			EmailService emailService = new EmailService();
-			emailService.sendEmail(confirmEmail);
-		} catch (MessagingException e) {
-			// Failed to send email
-			e.printStackTrace();
-		}
+		confirmEmail.send();
 		return "redirect:login";
 	}
 

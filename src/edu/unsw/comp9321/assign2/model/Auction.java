@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import edu.unsw.comp9321.assign2.logic.ConfirmationService;
 import edu.unsw.comp9321.assign2.model.User.UserStatus;
 
 @Entity(name = "auctions")
@@ -24,7 +26,7 @@ public class Auction {
 	@ManyToOne
 	User author;
 
-	@Column(name = "title")
+	@Column(name = "title", length=60)
 	String title; // 10 words max
 
 	@ManyToOne
@@ -33,7 +35,7 @@ public class Auction {
 	@Column(name="picture", columnDefinition="mediumblob")
 	byte[] picture;
 
-	@Column(name = "description")
+	@Column(name = "description", length=600)
 	String description; // 100 words max
 
 	@Column(name = "postagedetails")
@@ -60,6 +62,11 @@ public class Auction {
 	@Column(name="status")
 	int status;
 
+	@PrePersist
+	protected void onCreate() {
+		this.status = AuctionStatus.ACTIVE.getValue();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -188,7 +195,7 @@ public class Auction {
 	
 	public enum AuctionStatus {
 		SUSPENDED(0, "Suspended"), ACTIVE(1, "Active"), AWAITING(2,
-				"Awaiting Approval"), ENDEDSOLD(1, "Ended - Sold"), ENDEDNOTSOLD(1, "Ended - Not Sold");
+				"Awaiting Approval"), ENDEDSOLD(3, "Ended - Sold"), ENDEDNOTSOLD(4, "Ended - Not Sold");
 		private int status;
 		private String str;
 		private AuctionStatus(int status, String str) {

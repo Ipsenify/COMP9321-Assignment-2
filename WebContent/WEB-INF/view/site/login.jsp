@@ -10,6 +10,7 @@
 	
 	<form class="form-signin" method="POST" action="login">
 	   <h2 class="form-signin-heading">Please sign in</h2>
+	   <input type="hidden" value="${synchronizer}" name="synchronizer"/>
 	   <input name="redirectUrl" type="hidden" value="${redirectUrl}">
 	   <input name="username" type="text" class="form-control" placeholder="Username" autofocus="">
 	   <input name="password" type="password" class="form-control" placeholder="Password">

@@ -37,13 +37,6 @@
 ${
 css
 
-
-
-
-
-
-
-
 }
 </style>
 </head>
@@ -56,14 +49,19 @@ css
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<t:url />/home">iBuy Admin</a>
+				<a class="navbar-brand" href="<t:url />/admin/">iBuy Admin</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<t:url />/home">Home</a></li>
 					<li><a href="<t:url />/search">Search</a></li>
 				</ul>
+
+				<form class="navbar-form navbar-right">
+					<a href="<t:url />/admin/logout" class="btn btn-danger">Logout</a>
+				</form>
 			</div>
+
 			<!-- /.nav-collapse -->
 		</div>
 		<!-- /.container -->

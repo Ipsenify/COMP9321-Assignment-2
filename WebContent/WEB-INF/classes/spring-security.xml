@@ -10,6 +10,8 @@
     <http auto-config="true" realm="Admin Panel">
     	<intercept-url pattern="/admin/*" access="ROLE_USER" />
         <http-basic />
+        <logout invalidate-session="true" logout-url="/admin/logout" 
+    		logout-success-url="/" />
     </http>
 
     <authentication-manager>

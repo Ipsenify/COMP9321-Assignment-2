@@ -26,7 +26,7 @@
 		<p>
 			<a class="btn btn-sm btn-info" href="<t:url />/user/update">Update Profile</a>
 
-			<a class="btn btn-sm btn-info" href="<t:url />/user/update">Change Password</a>
+			<a class="btn btn-sm btn-info" href="<t:url />/user/changepassword">Change Password</a>
 		</p>
 	</div>
 

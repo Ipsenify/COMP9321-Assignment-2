@@ -13,7 +13,7 @@ import edu.unsw.comp9321.assign2.model.Category;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
-public class UpdateAuctionForm extends AbstractForm {
+public class UpdateAuctionForm extends AbstractSynchronizedForm {
 	
 	@Override
 	public String processView() throws ServletException, IOException

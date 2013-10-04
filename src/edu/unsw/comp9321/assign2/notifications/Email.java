@@ -3,6 +3,8 @@ package edu.unsw.comp9321.assign2.notifications;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import edu.unsw.comp9321.assign2.model.User;
 
 public class Email {
@@ -94,5 +96,14 @@ public class Email {
 
 	public void removeAllAttachments() {
 		this.attachments.clear();
+	}
+	
+	public void send(){
+		try {
+			EmailService emailService = new EmailService();
+			emailService.sendEmail(this);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 	}
 }

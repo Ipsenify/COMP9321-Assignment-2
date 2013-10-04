@@ -26,4 +26,6 @@ public interface AuctionService {
     public List<Auction> findAllArchivedByAuthor(User user);
     
     public List<Auction> findAllActiveByAuthor(User user);
+    
+    public List<Auction> findAllActive();
 }

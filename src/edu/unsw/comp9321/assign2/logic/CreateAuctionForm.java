@@ -13,7 +13,7 @@ import edu.unsw.comp9321.assign2.model.Category;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
-public class CreateAuctionForm extends AbstractForm {
+public class CreateAuctionForm extends AbstractSynchronizedForm {
 
 	@Override
 	public String processView() throws ServletException, IOException {

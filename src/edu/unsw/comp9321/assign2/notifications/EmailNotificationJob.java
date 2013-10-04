@@ -1,38 +1,50 @@
 package edu.unsw.comp9321.assign2.notifications;
 
 import java.util.Date;
+import java.util.List;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import edu.unsw.comp9321.assign2.common.DBUtil;
+import edu.unsw.comp9321.assign2.model.Auction;
+import edu.unsw.comp9321.assign2.model.Auction.AuctionStatus;
+import edu.unsw.comp9321.assign2.service.AuctionService;
+
 public class EmailNotificationJob implements Job {
 
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		// Check for out of date auctions
-
-		System.out.println("Sending email to: at" + new Date());
-		// Send notification to user for each
-
-		/*
-		try {
-			EmailService service = new EmailService();
-
-			Email email = new Email();
-			email.setFrom("admin@ibuy.com");
-			email.setTo("sam.elhusseini@gmail.com");
-			email.setSubject("Hello world");
-			email.setText("Hello world...");
-
-			
-			 //msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
-			 //"sam.elhusseini@gmail.com", "Sam El"));
-			 
-
-			service.sendEmail(email);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		
+		AuctionService service = DBUtil.getAuctionService();
+		List<Auction> auctions = service.findAllActive();
+		for(Auction auction : auctions){
+			if(!auction.isRunning()){
+				// Auction has Expired
+				if(auction.getCurrentPrice() >= auction.getReservePrice()){
+					// Email both parties and change status to ended Sold
+					auction.setAuctionStatus(AuctionStatus.ENDEDSOLD);
+					AuctionEndedToOwnerEmail endedOwner = new AuctionEndedToOwnerEmail(auction.getAuthor(), auction);
+					endedOwner.send();
+					
+					AuctionEndedToWinnerEmail endedWinner = new AuctionEndedToWinnerEmail(auction.getWinningUser(), auction);
+					endedWinner.send();
+				}else if(auction.getWinningUser() == null){
+					// Ended Not Sold
+					auction.setAuctionStatus(AuctionStatus.ENDEDNOTSOLD);
+					
+					AuctionEndedNotSoldToOwnerEmail endedNotSold = new AuctionEndedNotSoldToOwnerEmail(auction.getAuthor(), auction);
+					endedNotSold.send();
+				}else {
+					// Email owner to check offer, status awaiting approval
+					auction.setAuctionStatus(AuctionStatus.AWAITING);
+					
+					AuctionEndedActionRequiredToOwnerEmail actionRequired = new AuctionEndedActionRequiredToOwnerEmail(auction.getAuthor(), auction);
+					actionRequired.send();
+				}
+				service.merge(auction);
+			}
+		}
 	}
 }

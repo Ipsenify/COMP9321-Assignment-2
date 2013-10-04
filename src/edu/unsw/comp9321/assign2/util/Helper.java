@@ -2,11 +2,19 @@ package edu.unsw.comp9321.assign2.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class Helper {
 
+	public static String generateNext(){
+		Random random = new Random();
+		double randomNum = random.nextDouble();
+		Double result = 10 + (randomNum * (1000000000));
+		return encrypt(result.toString());
+	}
+	
 	public static String encrypt(String pass) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA");

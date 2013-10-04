@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<input name="id" value=${auction.id } type="hidden" />
+<input type="hidden" value="${synchronizer}" name="synchronizer"/>
+<input name="id" value="${auction.id }" type="hidden" />
 
 <div class="form-group">
 	<label for="inputListingTitle" class="col-lg-2 control-label">Title

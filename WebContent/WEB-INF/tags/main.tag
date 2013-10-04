@@ -50,9 +50,9 @@ ${css}
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="<t:url />/home">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a href="<t:url />/home">Search</a></li>
+					<li><a href="<t:url />/auction/create">New Auction</a></li>
+					<li><a href="<t:url />/my/auctions">My Auctions</a></li>
 				</ul>
 				<c:choose>
 					<c:when test="${context.isAuthenticated()}">
@@ -66,8 +66,7 @@ ${css}
 									<li role="presentation" class="dropdown-header">Your
 										Account</li>
 									<li><a href="<t:url />/user/view">Profile</a></li>
-									<li><a href="<t:url />/my/auctions">My Auctions</a></li>
-									<li><a href="<t:url />/site/settings">Settings</a></li>
+									<!-- <li><a href="<t:url />/site/settings">Settings</a></li> -->
 									<li><a href="<t:url />/logout">Logout</a></li>
 								</ul></li>
 

@@ -6,10 +6,11 @@ import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
+import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;
 import edu.unsw.comp9321.assign2.service.UserService;
 import edu.unsw.comp9321.assign2.util.Helper;
 
-public class UpdateProfileForm extends AbstractForm {
+public class UpdateProfileForm extends AbstractSynchronizedForm {
 	
 	@Override
 	public String processView() throws ServletException, IOException
@@ -24,14 +25,15 @@ public class UpdateProfileForm extends AbstractForm {
 	{
 		UserService service = DBUtil.getUserService();
 		User user = service.findById(context.getUserId());
-		user.setFirstName(param("user.firstName"));
-		user.setLastName(param("user.lastName"));
-		user.setEmail(param("user.email"));
-		//user.setNickName(param("user.nickName"));
-		user.setYearOfBirth(Helper.toInt(param("user.yearOfBirth")));
-		user.setFullAddress(param("user.fullAddress"));
-		user.setCreditCardNumber(param("user.creditCardNumber"));
+		user.setFirstName(param("firstName"));
+		user.setLastName(param("lastName"));
+		user.setEmail(param("email"));
+		user.setNickName(param("nickName"));
+		user.setYearOfBirth(Helper.toInt(param("yearOfBirth")));
+		user.setFullAddress(param("fullAddress"));
+		user.setCreditCardNumber(param("creditCardNumber"));
 		
+		// Update database
 		try{
 			service.merge(user);
 			// Update current user

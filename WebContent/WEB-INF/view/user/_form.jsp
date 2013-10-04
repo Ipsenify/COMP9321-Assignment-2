@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+<input type="hidden" value="${synchronizer}" name="synchronizer"/>
+
 <div class="form-group">
 	<label for="inputFirstName" class="col-lg-2 control-label">Name</label>
 	<div class="col-lg-5">
@@ -88,7 +90,12 @@
 </div>
 <div class="form-group">
 	<div class="col-lg-10 col-lg-offset-2">
-		<button class="btn btn-default">Cancel</button>
+		<c:if test="${user.getId() == null}" >
+			<a href="<t:url />/home" class="btn btn-default">Cancel</a>
+		</c:if>
+		<c:if test="${user.getId() != null}" >
+			<a href="<t:url />/user/view" class="btn btn-default">Cancel</a>
+		</c:if>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</div>
 </div>

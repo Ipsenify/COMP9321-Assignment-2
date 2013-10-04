@@ -33,9 +33,9 @@ public abstract class AbstractAction implements Action{
 		return ret;
 	}
 	
-	public void preView() { }
+	public void preView() throws ServletException, IOException { }
 	
-	public void postView(){ }
+	public void postView() throws ServletException, IOException { }
 	
 	public String executePOST() throws ServletException, IOException {
 		preAction();
@@ -46,13 +46,13 @@ public abstract class AbstractAction implements Action{
 		return ret;
 	}
 	
-	public void preSubmit() { }
+	public void preSubmit() throws ServletException, IOException { }
 	
-	public void postSubmit() { }
+	public void postSubmit() throws ServletException, IOException { }
 	
-	public void preAction() { }
+	public void preAction() throws ServletException, IOException  { }
 	
-	public void postAction() { }
+	public void postAction() throws ServletException, IOException { }
 	
 	public String processView() throws ServletException, IOException{
 		throw new ServletException("GET method is not supported for " + request.getRequestURI() + ".");

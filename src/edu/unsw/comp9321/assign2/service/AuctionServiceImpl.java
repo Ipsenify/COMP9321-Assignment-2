@@ -106,4 +106,13 @@ public class AuctionServiceImpl implements AuctionService {
 		
     	return dao.search(search);
     }
+
+    public List<Auction> findAllActive(){
+    	Search search = new Search();
+    	
+    	Filter filter = Filter.and(Filter.equal("status", 1));
+		search.addFilter(filter);
+    	
+    	return dao.search(search);
+    }
 }
