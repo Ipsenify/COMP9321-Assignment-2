@@ -12,9 +12,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import edu.unsw.comp9321.assign2.logic.ConfirmationService;
-import edu.unsw.comp9321.assign2.model.User.UserStatus;
-
 @Entity(name = "auctions")
 public class Auction {
 

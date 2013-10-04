@@ -1,7 +1,6 @@
 package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 

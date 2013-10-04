@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
-import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;
 import edu.unsw.comp9321.assign2.service.UserService;
 import edu.unsw.comp9321.assign2.util.Helper;
 

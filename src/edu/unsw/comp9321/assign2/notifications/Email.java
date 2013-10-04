@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 
 public class Email {
@@ -18,7 +19,6 @@ public class Email {
 	private List<Attachment> attachments = new ArrayList<Attachment>();
 
 	public Email(User user){
-		this.setFrom(EmailService.EMAIL);
 		this.setTo(user.getEmail());
 	}
 	
@@ -103,7 +103,7 @@ public class Email {
 		this.text = this.text + "<br /> <br/ > Regards, <br /> The iBuy Team.";
 		
 		try {
-			EmailService emailService = new EmailService();
+			EmailService emailService = DBUtil.getEmailService();
 			emailService.sendEmail(this);
 		} catch (MessagingException e) {
 			e.printStackTrace();

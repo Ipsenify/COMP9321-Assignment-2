@@ -4,6 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.unsw.comp9321.assign2.dao.UserDAO;
+import edu.unsw.comp9321.assign2.notifications.EmailService;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.service.BiddingService;
 import edu.unsw.comp9321.assign2.service.CategoryService;
@@ -14,6 +15,10 @@ public class DBUtil {
 	private static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
 
+	public static EmailService getEmailService(){
+		return (EmailService) ctx.getBean("emailService");
+	}
+	
 	public static UserService getUserService() {
 		ctx.refresh();
 		return (UserService) ctx.getBean("userService");
