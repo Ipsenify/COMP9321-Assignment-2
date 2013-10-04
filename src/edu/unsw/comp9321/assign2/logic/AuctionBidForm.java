@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import edu.unsw.comp9321.assign2.common.DBUtil;
+import edu.unsw.comp9321.assign2.model.Auction;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.notifications.BidEmail;
 import edu.unsw.comp9321.assign2.notifications.OutBidEmail;
@@ -21,7 +22,8 @@ public class AuctionBidForm extends AbstractSynchronizedForm {
 		Long userid = context.getUserId();
 		
 		if(auctionid != 0){
-			User currentWinner = DBUtil.getAuctionService().findById(auctionid).getWinningUser();
+			Auction auction = DBUtil.getAuctionService().findById(auctionid);
+			User currentWinner = auction.getWinningUser();
 			DBUtil.close();
 			
 			BiddingService service = DBUtil.getBiddingService();
@@ -33,11 +35,11 @@ public class AuctionBidForm extends AbstractSynchronizedForm {
 				context.setRedirectSuccess("Your bid has been placed.");
 				// Send outbid email to current winner
 				if(currentWinner != null){
-					OutBidEmail outBidEmail = new OutBidEmail(currentWinner);
+					OutBidEmail outBidEmail = new OutBidEmail(currentWinner, auction);
 					outBidEmail.send();
 				}
 				// Send Email to Winning User
-				BidEmail bidEmail = new BidEmail(context.getUser());
+				BidEmail bidEmail = new BidEmail(context.getUser(), auction);
 				bidEmail.send();
 			}
 		}

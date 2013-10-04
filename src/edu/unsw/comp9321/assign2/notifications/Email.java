@@ -99,6 +99,9 @@ public class Email {
 	}
 	
 	public void send(){
+		this.subject = "[iBuy] " + this.subject;
+		this.text = this.text + "<br /> <br/ > Regards, <br /> The iBuy Team.";
+		
 		try {
 			EmailService emailService = new EmailService();
 			emailService.sendEmail(this);

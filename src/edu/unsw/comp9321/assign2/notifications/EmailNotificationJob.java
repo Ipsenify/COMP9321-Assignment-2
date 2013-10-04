@@ -1,6 +1,5 @@
 package edu.unsw.comp9321.assign2.notifications;
 
-import java.util.Date;
 import java.util.List;
 
 import org.quartz.Job;
@@ -22,7 +21,13 @@ public class EmailNotificationJob implements Job {
 		for(Auction auction : auctions){
 			if(!auction.isRunning()){
 				// Auction has Expired
-				if(auction.getCurrentPrice() >= auction.getReservePrice()){
+				if(auction.getWinningUser() == null){
+					// Ended Not Sold
+					auction.setAuctionStatus(AuctionStatus.ENDEDNOTSOLD);
+					
+					AuctionEndedNotSoldToOwnerEmail endedNotSold = new AuctionEndedNotSoldToOwnerEmail(auction.getAuthor(), auction);
+					endedNotSold.send();
+				}else if(auction.getCurrentPrice() >= auction.getReservePrice()){
 					// Email both parties and change status to ended Sold
 					auction.setAuctionStatus(AuctionStatus.ENDEDSOLD);
 					AuctionEndedToOwnerEmail endedOwner = new AuctionEndedToOwnerEmail(auction.getAuthor(), auction);
@@ -30,12 +35,6 @@ public class EmailNotificationJob implements Job {
 					
 					AuctionEndedToWinnerEmail endedWinner = new AuctionEndedToWinnerEmail(auction.getWinningUser(), auction);
 					endedWinner.send();
-				}else if(auction.getWinningUser() == null){
-					// Ended Not Sold
-					auction.setAuctionStatus(AuctionStatus.ENDEDNOTSOLD);
-					
-					AuctionEndedNotSoldToOwnerEmail endedNotSold = new AuctionEndedNotSoldToOwnerEmail(auction.getAuthor(), auction);
-					endedNotSold.send();
 				}else {
 					// Email owner to check offer, status awaiting approval
 					auction.setAuctionStatus(AuctionStatus.AWAITING);
@@ -43,7 +42,7 @@ public class EmailNotificationJob implements Job {
 					AuctionEndedActionRequiredToOwnerEmail actionRequired = new AuctionEndedActionRequiredToOwnerEmail(auction.getAuthor(), auction);
 					actionRequired.send();
 				}
-				service.merge(auction);
+				service.save(auction);
 			}
 		}
 	}

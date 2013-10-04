@@ -6,7 +6,7 @@ public class ConfirmationEmail extends Email {
 
 	public ConfirmationEmail(User user, String url) {
 		super(user);
-		this.setSubject("[iBuy] Please verify your email '" + user.getEmail()
+		this.setSubject("Please verify your email '" + user.getEmail()
 				+ "'");
 		this.setText("Hey, we want to verify that you are indeed \""
 				+ user.getUserName()

@@ -30,6 +30,8 @@ public class SessionContext {
 				this.currentUser.onLogin();
 				service.merge(this.currentUser);
 				return true;
+			}else{
+				this.currentUser = null;
 			}
 		}
 		return false;

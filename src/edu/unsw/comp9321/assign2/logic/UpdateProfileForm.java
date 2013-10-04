@@ -31,7 +31,9 @@ public class UpdateProfileForm extends AbstractSynchronizedForm {
 		user.setNickName(param("nickName"));
 		user.setYearOfBirth(Helper.toInt(param("yearOfBirth")));
 		user.setFullAddress(param("fullAddress"));
-		user.setCreditCardNumber(param("creditCardNumber"));
+		String creditCardNumber = param("creditCardNumber");
+		if(creditCardNumber != null && !creditCardNumber.isEmpty())
+			user.setCreditCardNumber(param("creditCardNumber"));
 		
 		// Update database
 		try{

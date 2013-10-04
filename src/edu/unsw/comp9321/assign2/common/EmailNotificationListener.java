@@ -43,7 +43,7 @@ public class EmailNotificationListener implements ServletContextListener {
 					.withIdentity("job1", "group1")
 					.withSchedule(
 							SimpleScheduleBuilder.simpleSchedule()
-									.withIntervalInMinutes(1).repeatForever())
+									.withIntervalInSeconds(10).repeatForever())
 					.build();
 
 			sched.scheduleJob(job, trigger);

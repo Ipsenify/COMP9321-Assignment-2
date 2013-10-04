@@ -29,7 +29,7 @@ public class ActionFactory {
 		map.put("/home", IndexPage.class);
 		map.put("/login", LoginForm.class);
 		map.put("/logout", LogoutAction.class);
-		map.put("/register", RegistrationPage.class);
+		map.put("/register", RegistrationForm.class);
 		map.put("/search", SearchPage.class);
 		map.put("/user/confirm", ConfirmationService.class);
 		map.put("/user/register", RegistrationForm.class);

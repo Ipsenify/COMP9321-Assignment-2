@@ -92,7 +92,7 @@
 		Length</label>
 	<div class="col-lg-5">
 		<input name="exptime" id="inputListingCloseTime" type="text"
-			class="slider span2" value="" data-slider-min="3"
+			class="slider span2" value="10" data-slider-min="3"
 			data-slider-max="60" data-slider-step="1" data-slider-value="10"
 			data-slider-orientation="horizontal" data-slider-selection="after"
 			data-slider-tooltip="show"> <span class="help-block">Length
