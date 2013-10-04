@@ -12,11 +12,18 @@ public interface AuctionService {
 	public Auction save(Auction auction);
 
 	public void merge(Auction auction);
+	
+	public void remove(Auction auction);
 
     public List<Auction> findAll();
 
     public Auction findById(Long id);
 
-    public List<Auction> search(String query);
+    public List<Auction> searchActive(String query, String category);
     
+    public List<Auction> search(String query, String category);
+    
+    public List<Auction> findAllArchivedByAuthor(User user);
+    
+    public List<Auction> findAllActiveByAuthor(User user);
 }

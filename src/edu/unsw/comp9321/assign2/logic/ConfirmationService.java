@@ -20,9 +20,9 @@ public class ConfirmationService extends AbstractAction {
 		if(confirm != null){
 			UserService service = DBUtil.getUserService();
 			User user = service.findByConformation(confirm);
-			if(user != null){
+			if(user != null && user.getUserStatus() != UserStatus.BANNED){
 				user.setConfirmationUrl(null);
-				user.setStatus(UserStatus.VERIFIED);
+				user.setUserStatus(UserStatus.VERIFIED);
 				service.merge(user);
 				return "redirect:login";
 			}

@@ -3,8 +3,6 @@ package edu.unsw.comp9321.assign2.notifications;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.MessagingException;
-
 import edu.unsw.comp9321.assign2.model.User;
 
 public class Email {

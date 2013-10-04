@@ -7,8 +7,8 @@
                     http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http realm="Admin Panel">
-        <intercept-url pattern="/admin/*" access="ROLE_USER" />
+    <http auto-config="true" realm="Admin Panel">
+    	<intercept-url pattern="/admin/*" access="ROLE_USER" />
         <http-basic />
     </http>
 

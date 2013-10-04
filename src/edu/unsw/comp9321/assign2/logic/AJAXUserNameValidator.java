@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.service.UserService;
 
-public class UserNameValidator extends AbstractAction {
+public class AJAXUserNameValidator extends AbstractAction {
 
 	@Override 
 	public String processSubmit() throws ServletException, IOException{

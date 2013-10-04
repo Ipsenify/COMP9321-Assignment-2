@@ -71,7 +71,7 @@ public abstract class AbstractAction implements Action{
 	}
 	
 	public String param(String param){
-		return request.getParameter(param);
+		return (exists(param)) ? request.getParameter(param) : null;
 	}
 	
 	public boolean exists(String param){

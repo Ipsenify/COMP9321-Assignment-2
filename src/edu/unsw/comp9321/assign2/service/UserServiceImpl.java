@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 
 import edu.unsw.comp9321.assign2.dao.UserDAO;
@@ -23,10 +24,10 @@ public class UserServiceImpl implements UserService {
 		this.dao = dao;
 	}
 
-	public void refresh(User user){
+	public void refresh(User user) {
 		dao.refresh(user);
 	}
-	
+
 	public void persist(User user) {
 		dao.persist(user);
 	}
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 	public void merge(User user) {
 		dao.merge(user);
 	}
-
+	
 	public List<User> findAll() {
 		return dao.findAll();
 	}
@@ -76,10 +77,18 @@ public class UserServiceImpl implements UserService {
 		search.addFilterEqual("confirmationUrl", confirmationurl);
 		return dao.searchUnique(search);
 	}
-	
-	public User findByIdWithAuctions(Long id){
+
+	public User findByIdWithAuctions(Long id) {
 		User user = dao.find(id);
 		Hibernate.initialize(user.getAuctions());
 		return user;
+	}
+
+	public List<User> searchByUsername(String username) {
+		Search search = new Search();
+		
+		Filter filter = Filter.like("userName", "%" + username + "%");
+		search.addFilter(filter);
+		return dao.search(search);
 	}
 }

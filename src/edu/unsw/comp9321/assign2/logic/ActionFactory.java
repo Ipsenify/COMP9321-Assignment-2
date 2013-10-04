@@ -3,7 +3,14 @@ package edu.unsw.comp9321.assign2.logic;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
+
+import edu.unsw.comp9321.assign2.logic.admin.AJAXBanUser;
+import edu.unsw.comp9321.assign2.logic.admin.AJAXDeleteAuction;
+import edu.unsw.comp9321.assign2.logic.admin.AJAXUnBanUser;
+import edu.unsw.comp9321.assign2.logic.admin.AJAXUpdateAuctionStatus;
+import edu.unsw.comp9321.assign2.logic.admin.AdminAuctionsPage;
+import edu.unsw.comp9321.assign2.logic.admin.AdminPanelPage;
+import edu.unsw.comp9321.assign2.logic.admin.AdminUsersPage;
 
 public class ActionFactory {
 
@@ -29,15 +36,24 @@ public class ActionFactory {
 
 		map.put("/user/update", UpdateProfileForm.class);
 		map.put("/user/view", ViewProfilePage.class);
-		map.put("/user/validateusername", UserNameValidator.class);
-
-		//map.put("/admin/", AdminPanelPage.class);
+		map.put("/user/validateusername", AJAXUserNameValidator.class);
+		
 		map.put("/auction/create", CreateAuctionForm.class);
 		//map.put("/auction/update", UpdateAuctionForm.class);
 		map.put("/auction/view", ViewAuctionPage.class);
 		map.put("/auction/image", AuctionPictureRenderer.class);
 		map.put("/auction/bid", AuctionBidForm.class);
 		map.put("/my/auctions", ViewMyAuctionsPage.class);
+		map.put("/my/auctions/accept", AJAXAcceptAuctionOffer.class);
+		map.put("/my/auctions/reject", AJAXAcceptAuctionOffer.class);
+
+		map.put("/admin/", AdminPanelPage.class);
+		map.put("/admin/auctions/", AdminAuctionsPage.class);
+		map.put("/admin/auctions/updateauctionstatus", AJAXUpdateAuctionStatus.class);
+		map.put("/admin/auctions/deleteauction", AJAXDeleteAuction.class);
+		map.put("/admin/users/", AdminUsersPage.class);
+		map.put("/admin/users/banuser", AJAXBanUser.class);
+		map.put("/admin/users/unbanuser", AJAXUnBanUser.class);
 	}
 
 	public Action getAction(String actionStr) throws ServletException {

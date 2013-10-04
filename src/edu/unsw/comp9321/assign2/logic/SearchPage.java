@@ -1,8 +1,6 @@
 package edu.unsw.comp9321.assign2.logic;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -16,12 +14,14 @@ public class SearchPage extends AbstractPage {
 	@Override
 	public String processView() throws ServletException, IOException {
 		String query = param("q");
+		String category = param("c");
+		
 		Integer page = Helper.toInt(param("page"));
-		SearchResult searchResult = new SearchResult(query, page);
+		SearchResult<Auction> searchResult = new SearchResult<Auction>(query, category, page);
 
-		if (query != null && !query.isEmpty()) {
+		if ((query != null && !query.isEmpty()) || (category != null && !category.isEmpty())) {
 			AuctionService service = DBUtil.getAuctionService();
-			searchResult.setResultSet(service.search(query));
+			searchResult.setResultSet(service.searchActive(query, category));
 		}
 		request.setAttribute("searchResult", searchResult);
 		return "auction/search.jsp";
@@ -32,48 +32,5 @@ public class SearchPage extends AbstractPage {
 		return true;
 	}
 
-	public class SearchResult {
-
-		private List<Auction> resultSet;
-		private String query;
-		private int page;
-
-		private static final int size = 10;
-
-		public SearchResult(String query, Integer page) {
-			this.query = query;
-			this.page = page;
-		}
-
-		public List<Auction> getResultSet() {
-			int start = page * size;
-			int end = Math.min(this.resultSet.size(), start + size);
-			return this.resultSet.subList(start, end);
-		}
-		
-		public void setResultSet(List<Auction> resultSet){
-			this.resultSet = resultSet;
-		}
-
-		public Integer getPage() {
-			return this.page;
-		}
-
-		public String getQuery() {
-			return this.query;
-		}
-
-		public boolean hasNext() {
-			return this.resultSet != null && this.resultSet.size() > size
-					&& this.resultSet.size() > (page + 1) * size;
-		}
-
-		public boolean hasPrevious() {
-			return this.resultSet != null && this.resultSet.size() > size && page > 0;
-		}
-		
-		public boolean isEmpty(){
-			return this.resultSet == null || this.resultSet.isEmpty();
-		}
-	}
+	
 }

@@ -25,4 +25,6 @@ public interface UserService {
     public User findByConformation(String confirmationurl);
     
     public User findByIdWithAuctions(Long id);
+    
+    public List<User> searchByUsername(String username);
 }

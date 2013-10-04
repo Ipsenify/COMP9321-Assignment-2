@@ -3,7 +3,6 @@ package edu.unsw.comp9321.assign2.common;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.unsw.comp9321.assign2.logic.Action;
 import edu.unsw.comp9321.assign2.logic.ActionFactory;
-import edu.unsw.comp9321.assign2.util.Util;
 
 /**
  * Servlet implementation class ControllerServlet

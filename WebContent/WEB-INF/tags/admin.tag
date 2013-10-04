@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<%@attribute name="javascript" fragment="true" required="false" %>
+<%@attribute name="javascript" fragment="true" required="false"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,17 @@
       <script src="<t:url />/theme/js/respond.min.js"></script>
     <![endif]-->
 <style>
-${css}
+${
+css
+
+
+
+
+
+
+
+
+}
 </style>
 </head>
 <body style="">
@@ -46,50 +56,13 @@ ${css}
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<t:url />/home">iBuy</a>
+				<a class="navbar-brand" href="<t:url />/home">iBuy Admin</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<t:url />/home">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a href="<t:url />/search">Search</a></li>
 				</ul>
-				<c:choose>
-					<c:when test="${context.isAuthenticated()}">
-						<ul class="nav navbar-nav full pull-right">
-							<li class="dropdown"><a href="#"
-								class="dropdown-toggle hidden-xs hidden-sm"
-								data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> ${context.user.fullName } <b
-									class="caret"></b>
-							</a>
-								<ul class="dropdown-menu">
-									<li role="presentation" class="dropdown-header">Your
-										Account</li>
-									<li><a href="<t:url />/user/view">Profile</a></li>
-									<li><a href="<t:url />/my/auctions">My Auctions</a></li>
-									<li><a href="<t:url />/site/settings">Settings</a></li>
-									<li><a href="<t:url />/logout">Logout</a></li>
-								</ul></li>
-
-						</ul>
-					</c:when>
-					<c:otherwise>
-						<form class="navbar-form navbar-right" method="POST"
-							action="<t:url />/login">
-							<input name="redirectUrl" type="hidden" value="${currentaction }">
-							<div class="form-group">
-								<input type="text" placeholder="Username" name="username"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<input type="password" placeholder="Password" name="password"
-									class="form-control">
-							</div>
-							<button type="submit" class="btn btn-success">Log in</button>
-							<a href="register" class="btn btn-danger">Sign up</a>
-						</form>
-					</c:otherwise>
-				</c:choose>
 			</div>
 			<!-- /.nav-collapse -->
 		</div>
@@ -99,7 +72,36 @@ ${css}
 
 	<div class="container">
 
-		<jsp:doBody />
+		<div class="row row-offcanvas row-offcanvas-right">
+			<div class="col-xs-12 col-sm-9">
+				<p class="pull-right visible-xs">
+					<button type="button" class="btn" data-toggle="offcanvas">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</p>
+				<div class="row">
+
+					<jsp:doBody />
+
+				</div>
+
+			</div>
+			<!--/span-->
+
+			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar"
+				role="navigation">
+				<div class="well sidebar-nav">
+					<ul class="nav">
+						<li>Administration</li>
+						<li><a href="<t:url />/admin/users/">Users</a></li>
+						<li><a href="<t:url />/admin/auctions/">Auctions</a></li>
+					</ul>
+				</div>
+				<!--/.well -->
+			</div>
+
+		</div>
+
 
 		<hr>
 
@@ -115,9 +117,10 @@ ${css}
 	<script
 		src="${pageContext.request.contextPath}/theme/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/theme/js/offcanvas.js"></script>
-	<script src="${pageContext.request.contextPath}/theme/js/bootstrap-slider.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/theme/js/bootstrap-slider.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/theme/js/jquery.validate.min.js"></script>
-	<jsp:invoke fragment="javascript"/>
+	<jsp:invoke fragment="javascript" />
 </body>
 </html>

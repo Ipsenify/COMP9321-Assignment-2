@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.notifications.ConfirmationEmail;

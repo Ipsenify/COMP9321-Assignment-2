@@ -77,8 +77,8 @@ public class User {
 	Set<Auction> auctions;
 
 	public enum UserStatus {
-		NOTVERIFIED(0, "Not Verified"), VERIFIED(1, "Active"), DENIED(-1,
-				"Denied Access");
+		NOTVERIFIED(0, "Not Verified"), VERIFIED(1, "Active"), BANNED(-1,
+				"Banned");
 
 		private int status;
 		private String str;
@@ -227,10 +227,6 @@ public class User {
 		return confirmationUrl;
 	}
 
-	public void setStatus(UserStatus status) {
-		this.status = status.getValue();
-	}
-
 	public void setConfirmationUrl(String confirmationUrl) {
 		this.confirmationUrl = confirmationUrl;
 	}
@@ -266,9 +262,26 @@ public class User {
 		case 1:
 			return UserStatus.VERIFIED.toString();
 		case -1:
-			return UserStatus.DENIED.toString();
+			return UserStatus.BANNED.toString();
 		}
 		return "Status Unknown";
+	}
+
+
+	public void setUserStatus(UserStatus status) {
+		this.status = status.getValue();
+	}
+	
+	public UserStatus getUserStatus(){
+		switch (this.status) {
+		case 0:
+			return UserStatus.NOTVERIFIED;
+		case 1:
+			return UserStatus.VERIFIED;
+		case -1:
+			return UserStatus.BANNED;
+		}
+		return null;
 	}
 
 	public class AuctionComparator implements Comparator<Auction> {

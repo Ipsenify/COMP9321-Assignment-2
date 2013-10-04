@@ -10,7 +10,6 @@ import javax.servlet.http.Part;
 import edu.unsw.comp9321.assign2.common.DBUtil;
 import edu.unsw.comp9321.assign2.model.Auction;
 import edu.unsw.comp9321.assign2.model.Category;
-import edu.unsw.comp9321.assign2.model.User;
 import edu.unsw.comp9321.assign2.service.AuctionService;
 import edu.unsw.comp9321.assign2.util.Helper;
 

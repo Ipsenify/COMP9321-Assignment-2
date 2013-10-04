@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import edu.unsw.comp9321.assign2.model.User.UserStatus;
+
 @Entity(name = "auctions")
 public class Auction {
 
@@ -54,6 +56,9 @@ public class Auction {
 
 	@ManyToOne
 	User winningUser;
+	
+	@Column(name="status")
+	int status;
 
 	public Long getId() {
 		return id;
@@ -150,6 +155,14 @@ public class Auction {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
+	
+	public int getStatus(){
+		return this.status;
+	}
+	
+	public void setStatus(int status){
+		this.status = status;
+	}
 
 	// Helper Methods
 
@@ -173,4 +186,57 @@ public class Auction {
 		return Integer.toString(diff);
 	}
 	
+	public enum AuctionStatus {
+		SUSPENDED(0, "Suspended"), ACTIVE(1, "Active"), AWAITING(2,
+				"Awaiting Approval"), ENDEDSOLD(1, "Ended - Sold"), ENDEDNOTSOLD(1, "Ended - Not Sold");
+		private int status;
+		private String str;
+		private AuctionStatus(int status, String str) {
+			this.status = status;
+			this.str = str;
+		}
+		public int getValue() {
+			return this.status;
+		}
+		public String toString() {
+			return this.str;
+		}
+	};
+	
+	
+	public void setAuctionStatus(AuctionStatus status){
+		this.status = status.getValue();
+	}
+
+	public AuctionStatus getAuctionStatus(){
+		switch (this.status) {
+		case 0:
+			return AuctionStatus.SUSPENDED;
+		case 1:
+			return AuctionStatus.ACTIVE;
+		case 2:
+			return AuctionStatus.AWAITING;
+		case 3:
+			return AuctionStatus.ENDEDSOLD;
+		case 4:
+			return AuctionStatus.ENDEDNOTSOLD;
+		}
+		return null;
+	}
+	
+	public String getStatusMessage(){
+		switch (this.status) {
+		case 0:
+			return AuctionStatus.SUSPENDED.toString();
+		case 1:
+			return AuctionStatus.ACTIVE.toString();
+		case 2:
+			return AuctionStatus.AWAITING.toString();
+		case 3:
+			return AuctionStatus.ENDEDSOLD.toString();
+		case 4:
+			return AuctionStatus.ENDEDNOTSOLD.toString();
+		}
+		return "Status Unknown";
+	}
 }
